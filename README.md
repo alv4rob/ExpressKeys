@@ -11,6 +11,10 @@ ExpressKeys consiste en una web de compra de "keys" de videojuegos para las dife
  * Catálogo: Conjunto o lista de todas las keys disponibles de compra de videojuegos que saparecen en la página.
 
 # Parte pública
+* Busqueda de videojuegos
+* Filtrar catálogo
+* Comprar keys
+* Logearse/Registrarse 
 # Parte privada
 # Servicio interno
 
