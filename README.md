@@ -13,11 +13,7 @@ ExpressKeys consiste en una web de compra de "keys" de videojuegos para las dife
 # Parte pública
 # Parte privada
 # Servicio interno
-# Integrantes del equipo de desarrollo
 
-Nombre:
-
-Descripción:
 
 # Integrantes
 
