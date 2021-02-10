@@ -22,9 +22,8 @@ ExpressKeys consiste en una web de compra de "keys" de videojuegos para las dife
 * Consultar información de usuarios.
 
 # Servicio interno 
-* Gestión de contenido
-* Gestión de usuarios
-* Gestión de pagos
+El servicio interno registrará a los usuarios, mostrará el contenido del catálogo de videojuegos y enviará un correo tras la compra de una key.
+
 
 # Integrantes 👥 
 
