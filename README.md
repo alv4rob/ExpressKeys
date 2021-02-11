@@ -1,6 +1,6 @@
 # Express Keys
 <p align="center">
-<img src="imagenes/logo.png" alt="Logo" width="1000" height="1000">
+<img src="imagenes/logo.png" alt="Logo" width="600" height="600">
 
 # Descripción de la web 🌐
 ExpressKeys consiste en una web de compra de "keys" de videojuegos para las diferentes plataformas online del mercado. En ella el cliente puede buscar los diferentes titulos disponibles utilizando diferentes herramientas como por ejemplo un sistema de filtrado por categorias, por precio, por plataforma online, etc... para posteriormente comprarlo y recibir su codigo para canjearlo.
