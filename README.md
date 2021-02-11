@@ -8,7 +8,8 @@ ExpressKeys consiste en una web de compra de "keys" de videojuegos para las dife
  * Clientes: Usuarios del sistema que compran las keys en la página web.
  * Administradores: Usuario o usuarios que se encargan de añadir o eliminar productos del catalogo de la tienda.
  * Producto: Son las keys de los videojuegos que se muestran en la tienda y el usuario puede comprar.
- * Catálogo: Conjunto o lista de todas las keys disponibles de compra de videojuegos que saparecen en la página.
+ * Carrito de la compra: Los usuarios pueden añadir una o varias keys a una cesta de la compra antes de adquirirlas.
+ * Valoraciones: Tras comprar una key un usuario puede dejar una puntuacion a la compra o revisar la puntuacion de otros productos,
 
 # Parte pública 🔓
 * Busqueda de videojuegos
@@ -22,7 +23,7 @@ ExpressKeys consiste en una web de compra de "keys" de videojuegos para las dife
 * Consultar información de usuarios.
 
 # Servicio interno 🖥
-El servicio interno registrará a los usuarios, mostrará el contenido del catálogo de videojuegos y enviará un correo tras la compra de una key.
+El servicio interno enviará un correo electrónico al usuario tras la compra de una key con los detalles de su pedido.
 
 
 # Integrantes 👥 
