@@ -8,8 +8,12 @@ public class WebController {
 	
 	@GetMapping("/principal")
 	public String principal() {
-		return "hola.html";
-		
+	return "hola.html";
+	}
+	
+	@GetMapping("/catalogo")
+	public String catalogo() {
+		return "catalogo.html";
 	}
 
 }
