@@ -33,3 +33,4 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 * Sergio García Rosell [s.garciaro.2017@alumnos.urjc.es] https://github.com/SergioGr8
 * Álvaro Barrio Luquero [a.barrio.2017@alumnos.urjc.es] https://github.com/alv4rob
 * Nerfi Salim Perello [n.salim.2017@alumnos.urjc.es] https://github.com/nerf7
+"Some changes" 
