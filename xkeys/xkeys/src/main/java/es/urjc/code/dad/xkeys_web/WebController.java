@@ -8,7 +8,7 @@ public class WebController {
 	
 	@GetMapping("/principal")
 	public String principal() {
-		return "holaaaa.html";
+		return "hola.html";
 		
 	}
 
