@@ -1,0 +1,13 @@
+ package es.urjc.code.dad.xkeys_web;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class XkeysApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(XkeysApplication.class, args);
+	}
+
+}
