@@ -1,0 +1,20 @@
+<html>
+<body>
+
+
+	<h1>Productos</h1>
+	{{#productos}}
+	<a href="producto/{{id}}">{{nombre}} {{precio}}</a><br>
+	{{/productos}}
+	
+	{{^productos}}
+	<p>Sin productos aun.</p>
+	{{/productos}}
+
+
+	<br>
+	<a href="nuevoProducto.html">Nuevo producto</a>
+
+</body>
+
+</html>

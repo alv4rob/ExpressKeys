@@ -9,11 +9,11 @@ public class Producto {
 	
 	private String key;
 	private String nombre;
-	private String precio;
+	private int precio;
 	private String plataforma; 
     private String categoria;
     
-	public Producto(String key, String nombre, String precio, String plataforma, String categoria) {
+	public Producto(String key, String nombre, int precio, String plataforma, String categoria) {
 		
 		this.key = key;
 		this.nombre = nombre;
@@ -46,11 +46,11 @@ public class Producto {
 		this.nombre = nombre;
 	}
 	
-	public String getPrecio() {
+	public int getPrecio() {
 		return precio;
 	}
 	
-	public void setPrecio(String precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 	
