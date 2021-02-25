@@ -11,13 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WebController {
 	
-//	@PostMapping("/index")
-//	public String index() {
-//	
-//		
-//	    return "index";
-//  	}
-//	
+
 	@PostMapping("/login")
 	public String login(Model model, @RequestParam String user, @RequestParam String password) {
 		
@@ -70,6 +64,16 @@ public class WebController {
 	private ClienteService clienteService;
 
 	
+	@GetMapping("/clientes")
+	public String mostrarClientes(Model model) {
+
+		model.addAttribute("clientes", clienteService.findAll());
+
+		return "listaUsuarios";
+	}
+	
+	
+	
 	@PostMapping("/registrarse")
 	public String nuevoUsuario(Model model, Cliente cliente) {
 
@@ -77,5 +81,30 @@ public class WebController {
 
 		return "usuarioRegistrado";
 	}
+	
+	
+	
+	@GetMapping("/clientes/{id}")
+	public String mostrarCliente(Model model, @PathVariable long id) {
+
+		Cliente cliente = clienteService.findById(id);
+
+		model.addAttribute("cliente", cliente);
+
+		return "mostrarCliente";
+	}
+	
+	@GetMapping("/clientes/{id}/eliminar")
+	public String eliminarCliente(Model model, @PathVariable long id) {
+
+		clienteService.deleteById(id);
+
+		return "clienteEliminado";
+	}
+	
+	
+	
+	
+	
 	
 }

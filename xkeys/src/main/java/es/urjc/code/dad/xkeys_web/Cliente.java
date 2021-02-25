@@ -17,6 +17,7 @@ public class Cliente {
 		
 		this.nombre = nombre;
 		this.contraseña = contraseña;
+		this.correo=correo;
 	}
 
 	public String getCorreo() {
