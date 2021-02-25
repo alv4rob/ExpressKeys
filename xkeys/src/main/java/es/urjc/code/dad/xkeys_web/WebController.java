@@ -25,7 +25,7 @@ public class WebController {
 		model.addAttribute("password", password);
 		model.addAttribute("productos", productoService.findAll());
 		
-		return "login";
+		return "logged";
 	}
 	
 	//Para el catalogo
@@ -64,6 +64,18 @@ public class WebController {
 		productoService.deleteById(id);
 
 		return "eliminarProducto";
+	}
+	
+	@Autowired
+	private ClienteService clienteService;
+
+	
+	@PostMapping("/registrarse")
+	public String nuevoUsuario(Model model, Cliente cliente) {
+
+		clienteService.save(cliente);
+
+		return "usuarioRegistrado";
 	}
 	
 }
