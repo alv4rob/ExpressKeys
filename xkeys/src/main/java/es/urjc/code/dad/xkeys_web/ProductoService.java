@@ -15,8 +15,9 @@ public class ProductoService {
 	private AtomicLong nextId = new AtomicLong();
 
 	public ProductoService() {
-		save(new Producto("31311313", "Cyberpunk 2077", 70, "PC", "RPG"));
-		save(new Producto("14532432", "FIFA 21", 60, "PS4", "Deporte"));
+		save(new Producto("31311313", "Cyberpunk 2077", 70, "PC/PS4/XBOXONE", "RPG"));
+		save(new Producto("14532432", "FIFA 21", 60, "PC/PS4/XBOXONE", "Deporte"));
+		save(new Producto("21353242", "Minecraft", 20, "PC/PS4/XBOXONE/Switch", "Sandbox"));
 	}
 
 	public Collection<Producto> findAll() {

@@ -33,7 +33,7 @@ public class WebController {
 	private ProductoService productoService;
 
 	@GetMapping("/")
-	public String showPosts(Model model) {
+	public String mostrarProductos(Model model) {
 
 		model.addAttribute("productos", productoService.findAll());
 
@@ -41,15 +41,15 @@ public class WebController {
 	}
 
 	@PostMapping("/producto/nuevo")
-	public String newPost(Model model, Producto producto) {
+	public String nuevoProducto(Model model, Producto producto) {
 
 		productoService.save(producto);
 
-		return "guardarProducto";
+		return "productoGuardado";
 	}
 
 	@GetMapping("/producto/{id}")
-	public String showPost(Model model, @PathVariable long id) {
+	public String mostrarProducto(Model model, @PathVariable long id) {
 
 		Producto producto = productoService.findById(id);
 
@@ -59,11 +59,11 @@ public class WebController {
 	}
 	
 	@GetMapping("/producto/{id}/eliminar")
-	public String deletePost(Model model, @PathVariable long id) {
+	public String eliminarProducto(Model model, @PathVariable long id) {
 
 		productoService.deleteById(id);
 
-		return "eliminarProducto";
+		return "productoEliminado";
 	}
 	
 	@Autowired
