@@ -1,0 +1,24 @@
+<html>
+<body>
+
+
+	<h1>Carrito</h1>
+	{{#carrito.carrito}}
+	Producto: {{nombre}}, Precio: {{precio}}<br>
+	{{/carrito.carrito}}
+	
+	{{^carrito.carrito}}
+	<p>El carrito esta vacio.</p>
+	{{/carrito.carrito}}
+	
+	<br>
+    {{^carrito.esVacio}}
+    <p>Precio total: {{carrito.precioTotal}}<p>
+	Comprar
+	{{/carrito.esVacio}}
+	<br>
+	<br>
+	<a href="/">Atras</a>
+
+</body>
+</html>
