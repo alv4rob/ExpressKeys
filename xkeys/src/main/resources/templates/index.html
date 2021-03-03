@@ -3,16 +3,22 @@
 
 	
 	 <img src="/imagenes/logo.png" width="200" height="200"/> 
+	 {{#bienvenida}}		
 	 <h1> Bienvenido a EXPRESS KEYS </h1>
+	 {{/bienvenida}}
 	 
 	 <h4> <a href="registrarse.html">Registrarse</a> </h4>
 	 <h4> <a href="login.html">Iniciar sesion</a> </h4>
 	 
 	 <br>
-
+     <h4> <a href="/carrito">Ver carrito ({{n}})</a> </h4>
+     
 	 <h4> <a href="/clientes">Mostrar usuarios</a> </h4>
 	
 	 {{>catalogo}}
+	 
+	 	<br>
+	<a href="nuevoProducto.html">Nuevo producto</a>
 	
 
 </body>

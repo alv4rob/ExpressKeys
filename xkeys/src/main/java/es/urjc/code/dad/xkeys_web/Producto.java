@@ -1,4 +1,5 @@
 package es.urjc.code.dad.xkeys_web;
+import java.util.ArrayList;
 
 //@Entity
 public class Producto {
@@ -7,15 +8,19 @@ public class Producto {
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String key;
+	private ArrayList<String> ps4;
+	private ArrayList<String> xboxone;
+	private ArrayList<String> pc;
 	private String nombre;
 	private int precio;
 	private String plataforma; 
     private String categoria;
     
-	public Producto(String key, String nombre, int precio, String plataforma, String categoria) {
+	public Producto(ArrayList<String> ps4, ArrayList<String> xboxone, ArrayList<String> pc, String nombre, int precio, String plataforma, String categoria) {
 		
-		this.key = key;
+		this.ps4 = ps4;
+		this.xboxone = xboxone;
+		this.pc = pc;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.plataforma = plataforma;
@@ -30,14 +35,48 @@ public class Producto {
 		this.id = id;
 	}
 	
-	public String getKey() {
-		return key;
+	public String comprarKeyPs4() {
+		String e = ps4.get(0);
+		ps4.remove(0);
+		return e;
 	}
 	
-	public void setKey(String key) {
-		this.key = key;
+	public String comprarKeyXboxone() {
+		String e = xboxone.get(0);
+		xboxone.remove(0);
+		return e;
 	}
 	
+	public String comprarKeyPc() {
+		String e = pc.get(0);
+		pc.remove(0);
+		return e;
+	}
+	
+	public ArrayList<String> getPs4() {
+		return ps4;
+	}
+
+	public void setPs4(ArrayList<String> ps4) {
+		this.ps4 = ps4;
+	}
+
+	public ArrayList<String> getXboxone() {
+		return xboxone;
+	}
+
+	public void setXboxone(ArrayList<String> xboxone) {
+		this.xboxone = xboxone;
+	}
+
+	public ArrayList<String> getPc() {
+		return pc;
+	}
+
+	public void setPc(ArrayList<String> pc) {
+		this.pc = pc;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -72,8 +111,8 @@ public class Producto {
 	
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", key=" + key + ", nombre=" + nombre + ", precio=" + precio + ", plataforma="
-				+ plataforma + ", categoria=" + categoria + "]";
+		return "Producto [id=" + id + ", ps4=" + ps4 + ", xboxone=" + xboxone + ", pc=" + pc + ", nombre=" + nombre
+				+ ", precio=" + precio + ", plataforma=" + plataforma + ", categoria=" + categoria + "]";
 	}
     
 }

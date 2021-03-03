@@ -1,5 +1,7 @@
 package es.urjc.code.dad.xkeys_web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WebController {
 	
+	
+	@Autowired
+	private ProductoService productoService;
+	
+	@Autowired
+	private ClienteService clienteService;
+	
+	@Autowired
+	private Carrito carrito;
+	
 
+	
+	
+	@GetMapping("/")
+	public String mostrarProductos(Model model, HttpSession sesion) {
+
+		model.addAttribute("bienvenida", sesion.isNew());
+		
+		model.addAttribute("n", carrito.nCarrito());
+		
+		model.addAttribute("productos", productoService.findAll());
+
+		return "index";
+	}
+	
+	
 	@PostMapping("/login")
 	public String login(Model model, @RequestParam String user, @RequestParam String password) {
 		
@@ -22,17 +49,7 @@ public class WebController {
 		return "logged";
 	}
 	
-	//Para el catalogo
-	@Autowired
-	private ProductoService productoService;
 
-	@GetMapping("/")
-	public String mostrarProductos(Model model) {
-
-		model.addAttribute("productos", productoService.findAll());
-
-		return "index";
-	}
 
 	@PostMapping("/producto/nuevo")
 	public String nuevoProducto(Model model, Producto producto) {
@@ -60,10 +77,17 @@ public class WebController {
 		return "productoEliminado";
 	}
 	
-	@Autowired
-	private ClienteService clienteService;
+	@GetMapping("/producto/{id}/anadido")
+	public String añadirCarrito(Model model, @PathVariable long id) {
+  
+		Producto producto = productoService.findById(id);
+		carrito.añadirAlCarrito(producto);
 
+		return "anadidoCarrito";
+	}
 	
+
+
 	@GetMapping("/clientes")
 	public String mostrarClientes(Model model) {
 
@@ -73,7 +97,6 @@ public class WebController {
 	}
 	
 	
-	
 	@PostMapping("/registrarse")
 	public String nuevoUsuario(Model model, Cliente cliente) {
 
@@ -81,7 +104,6 @@ public class WebController {
 
 		return "usuarioRegistrado";
 	}
-	
 	
 	
 	@GetMapping("/clientes/{id}")
@@ -103,7 +125,22 @@ public class WebController {
 	}
 	
 	
+	@GetMapping("/carrito")
+	public String mostrarCarrito(Model model) {
+
+		//model.addAttribute("precioTotal", carrito.getPrecioTotal());
+		model.addAttribute("carrito", carrito);
+
+		return "carrito";
+	}
 	
+	/*@GetMapping("/comprar")
+	public String comprar(Model model) {
+
+		model.addAttribute("carrito", carrito.getCarrito());
+
+		return "carrito";
+	}*/
 	
 	
 	

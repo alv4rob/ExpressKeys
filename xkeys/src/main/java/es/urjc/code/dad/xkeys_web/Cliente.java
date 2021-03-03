@@ -8,15 +8,15 @@ public class Cliente {
 	private long id;
 	
 	private String nombre;
-	private String contraseña;
+	private String contrasena;
 	private String correo;
 	
 	protected Cliente() {}
 	
-	public Cliente (String nombre, String contraseña, String correo) {
+	public Cliente (String nombre, String contrasena, String correo) {
 		
 		this.nombre = nombre;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.correo=correo;
 	}
 
@@ -44,19 +44,18 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nombre=" + nombre + ", contraseña=" + contraseña + ", correo=" + correo + "]";
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + contrasena + ", correo=" + correo + "]";
 	}
 
-	//DEPENDENCIAS, CARRITO, VALORACIONES, ETC
 
 }
