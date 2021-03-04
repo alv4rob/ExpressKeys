@@ -19,6 +19,9 @@ public class WebController {
 	
 	
 	@Autowired
+	private ValoracionRepository valoracionR;
+	
+	@Autowired
 	private ProductoService productoService;
 	
 	@Autowired
@@ -160,7 +163,14 @@ public class WebController {
 		return "carrito";
 	}*/
 	
+	@PostMapping("/producto/guardarvaloracion")
+	public String guardarAnuncio(Model model, @RequestParam String nombre,
+			@RequestParam String valoracion, @PathVariable long id) {
 	
+		Producto producto = productoR.findById(id);
+
+		return "ValoracionEnviada";
+	}
 	
 	
 	
