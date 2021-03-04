@@ -1,11 +1,21 @@
 package es.urjc.code.dad.xkeys_web;
-import java.util.ArrayList;
 
-//@Entity
+import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+
+
+
+
+@Entity
 public class Producto {
 	
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	private ArrayList<String> ps4;
@@ -15,6 +25,8 @@ public class Producto {
 	private int precio;
 	private String plataforma; 
     private String categoria;
+    
+    protected Producto() {}
     
 	public Producto(ArrayList<String> ps4, ArrayList<String> xboxone, ArrayList<String> pc, String nombre, int precio, String plataforma, String categoria) {
 		

@@ -1,5 +1,9 @@
 package es.urjc.code.dad.xkeys_web;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,49 +25,63 @@ public class WebController {
 	private ClienteService clienteService;
 	
 	@Autowired
+	private ClienteRepository clienteR;
+	
+	@Autowired
+	private ProductoRepository productoR;
+	
+	@Autowired
 	private Carrito carrito;
 	
-
+	@PostConstruct
+	public void initC() {
+		clienteR.save(new Cliente("Pepe", "hola1234", "pepe@gmail.com"));
+		clienteR.save(new Cliente("Pepa", "hola1234564", "pepaa@gmail.com"));
+	}
 	
+	@PostConstruct
+	public void initP() {
+		productoR.save(new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), new ArrayList<>(Arrays.asList("cyberxbox1", "cyberxbox2", "cyberxbox3")), new ArrayList<>(Arrays.asList("cyberpc1", "cyberpc2", "cyberpc3")), "Cyberpunk 2077", 70, "PC/PS4/XBOXONE", "RPG"));
+		productoR.save(new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC/PS4/XBOXONE", "Deporte"));
+		productoR.save(new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PC/PS4/XBOXONE/Switch", "Sandbox"));
+	}
 	
 	@GetMapping("/")
 	public String mostrarProductos(Model model, HttpSession sesion) {
 
+		
 		model.addAttribute("bienvenida", sesion.isNew());
-		
-		model.addAttribute("n", carrito.nCarrito());
-		
-		model.addAttribute("productos", productoService.findAll());
+		model.addAttribute("n", carrito.nCarrito());		
+		model.addAttribute("productos", productoR.findAll());
 
 		return "index";
 	}
 	
 	
 	@PostMapping("/login")
-	public String login(Model model, @RequestParam String user, @RequestParam String password) {
+	public String login(Model model, @RequestParam String user, @RequestParam String password, HttpSession sesion) {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("password", password);
-		model.addAttribute("productos", productoService.findAll());
+		model.addAttribute("n", carrito.nCarrito());
+		model.addAttribute("productos", productoR.findAll());
 		
 		return "logged";
 	}
 	
 
 
-	@PostMapping("/producto/nuevo")
+	/*@PostMapping("/producto/nuevo")
 	public String nuevoProducto(Model model, Producto producto) {
 
 		productoService.save(producto);
-
 		return "productoGuardado";
-	}
+	}*/
 
 	@GetMapping("/producto/{id}")
 	public String mostrarProducto(Model model, @PathVariable long id) {
 
-		Producto producto = productoService.findById(id);
-
+		Producto producto = productoR.findById(id);
 		model.addAttribute("producto", producto);
 
 		return "mostrarProducto";
@@ -72,7 +90,7 @@ public class WebController {
 	@GetMapping("/producto/{id}/eliminar")
 	public String eliminarProducto(Model model, @PathVariable long id) {
 
-		productoService.deleteById(id);
+		productoR.deleteById(id);
 
 		return "productoEliminado";
 	}
@@ -80,7 +98,7 @@ public class WebController {
 	@GetMapping("/producto/{id}/anadido")
 	public String añadirCarrito(Model model, @PathVariable long id) {
   
-		Producto producto = productoService.findById(id);
+		Producto producto = productoR.findById(id);
 		carrito.añadirAlCarrito(producto);
 
 		return "anadidoCarrito";
@@ -91,7 +109,7 @@ public class WebController {
 	@GetMapping("/clientes")
 	public String mostrarClientes(Model model) {
 
-		model.addAttribute("clientes", clienteService.findAll());
+		model.addAttribute("clientes", clienteR.findAll());
 
 		return "listaUsuarios";
 	}
@@ -100,7 +118,7 @@ public class WebController {
 	@PostMapping("/registrarse")
 	public String nuevoUsuario(Model model, Cliente cliente) {
 
-		clienteService.save(cliente);
+		clienteR.save(cliente);
 
 		return "usuarioRegistrado";
 	}
@@ -109,7 +127,7 @@ public class WebController {
 	@GetMapping("/clientes/{id}")
 	public String mostrarCliente(Model model, @PathVariable long id) {
 
-		Cliente cliente = clienteService.findById(id);
+		Cliente cliente = clienteR.findById(id);
 
 		model.addAttribute("cliente", cliente);
 
@@ -119,7 +137,7 @@ public class WebController {
 	@GetMapping("/clientes/{id}/eliminar")
 	public String eliminarCliente(Model model, @PathVariable long id) {
 
-		clienteService.deleteById(id);
+		clienteR.deleteById(id);
 
 		return "clienteEliminado";
 	}
@@ -141,6 +159,8 @@ public class WebController {
 
 		return "carrito";
 	}*/
+	
+	
 	
 	
 	

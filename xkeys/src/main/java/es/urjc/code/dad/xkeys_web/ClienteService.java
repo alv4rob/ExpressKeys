@@ -14,10 +14,10 @@ public class ClienteService {
 	private ConcurrentMap<Long, Cliente> clientes = new ConcurrentHashMap<>();
 	private AtomicLong nextId = new AtomicLong();
 
-	public ClienteService() {
+	/*public ClienteService() {
 		save(new Cliente("Pepe", "hola1234", "pepe@gmail.com"));
 		save(new Cliente("Pepa", "hola1234564", "pepaa@gmail.com"));
-	}
+	}*/
 
 	public Collection<Cliente> findAll() {
 		return clientes.values();
