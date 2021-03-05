@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 @Controller
 public class WebController {
 	
@@ -52,8 +51,11 @@ public class WebController {
 	public void initPV() {
 		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), new ArrayList<>(Arrays.asList("cyberxbox1", "cyberxbox2", "cyberxbox3")), new ArrayList<>(Arrays.asList("cyberpc1", "cyberpc2", "cyberpc3")), "Cyberpunk 2077", 70, "PC/PS4/XBOXONE", "RPG");
 		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC/PS4/XBOXONE", "Deporte");
+		//Producto producto3 =new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PC/PS4/XBOXONE/Switch", "Sandbox");
+		
 		productoR.save(producto);
 		productoR.save(producto2);
+		//productoR.save(producto3);
 		
 		Valoracion v1 = new Valoracion("Pepe","Muy contento con la compra");
 		Valoracion v3 = new Valoracion("Pepe","Muy contento con la compra");
@@ -184,15 +186,31 @@ public class WebController {
 	}*/
 	
 
-	@PostMapping("/producto/guardarvaloracion")
-	public String guardarAnuncio(Model model) {
-	
-		model.addAttribute("valoracion", valoracionR.findAll());
+	@GetMapping("/producto/{id}/introducirValoracion")
+	public String guardarAnuncio(Model model,@PathVariable long id) {
+		
+		Producto producto = productoR.findById(id);
+		model.addAttribute("producto", producto);
 		
 
-		return "mostrarProducto";
+		return "introducirValoracion";
 	}
 	
+	@PostMapping("/producto/{id}/ValoracionEnviada")
+	public  String anadirValoracion(Model model, Valoracion valoracion,@PathVariable long id) {
+		
+		
+		Producto producto = productoR.findById(id);
+		model.addAttribute("producto", producto);
+		
+		valoracion.setProductoH(producto);
+		
+		valoracionR.save(valoracion);
+		
+		
+		
+		return "ValoracionEnviada";
 	
+	}
 	
 }

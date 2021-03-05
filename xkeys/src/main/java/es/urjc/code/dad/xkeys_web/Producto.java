@@ -4,6 +4,7 @@ package es.urjc.code.dad.xkeys_web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Producto {
 	private String plataforma; 
     private String categoria;
     
-    @OneToMany(mappedBy = "productoH")
+    @OneToMany(mappedBy = "productoH", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Valoracion> valoracion = new ArrayList<>();
 
 	public Producto(ArrayList<String> ps4, ArrayList<String> xboxone, ArrayList<String> pc, String nombre,
@@ -138,6 +139,11 @@ public class Producto {
 	public void setValoracion(List<Valoracion> valoracion) {
 		this.valoracion = valoracion;
 	}
+	
+	public void anadirValoracion(Valoracion valoraciones) {
+        valoracion.add(valoraciones);
+        valoraciones.setProductoH(this);
+    }
 
 	@Override
 	public String toString() {
