@@ -40,6 +40,16 @@
 	
 	<p>----------------------------------<p>
 	
+	 <h3>Valoraciones</h3>
+	 {{#producto.valoracion}}
+	<p>	{{.}}</p>
+	{{/producto.valoracion}}
+	
+    {{^producto.valoracion}}
+	<p> No hay valoraciones </p>
+	{{/producto.valoracion}}
+    
+	
 	<a href="/producto/{{producto.id}}/eliminar">Eliminar producto</a>
 	<br>
 	<a href="introducirValoracion.html">Dejar valoracion</a>

@@ -22,12 +22,6 @@ public class WebController {
 	private ValoracionRepository valoracionR;
 	
 	@Autowired
-	private ProductoService productoService;
-	
-	@Autowired
-	private ClienteService clienteService;
-	
-	@Autowired
 	private ClienteRepository clienteR;
 	
 	@Autowired
@@ -42,11 +36,37 @@ public class WebController {
 		clienteR.save(new Cliente("Pepa", "hola1234564", "pepaa@gmail.com"));
 	}
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void initP() {
 		productoR.save(new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), new ArrayList<>(Arrays.asList("cyberxbox1", "cyberxbox2", "cyberxbox3")), new ArrayList<>(Arrays.asList("cyberpc1", "cyberpc2", "cyberpc3")), "Cyberpunk 2077", 70, "PC/PS4/XBOXONE", "RPG"));
 		productoR.save(new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC/PS4/XBOXONE", "Deporte"));
 		productoR.save(new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PC/PS4/XBOXONE/Switch", "Sandbox"));
+	
+	}
+	@PostConstruct
+	public void initV() {
+		valoracionR.save(new Valoracion("Pepe", "Contento con la compra"));
+	}*/
+	
+	@PostConstruct
+	public void initPV() {
+		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), new ArrayList<>(Arrays.asList("cyberxbox1", "cyberxbox2", "cyberxbox3")), new ArrayList<>(Arrays.asList("cyberpc1", "cyberpc2", "cyberpc3")), "Cyberpunk 2077", 70, "PC/PS4/XBOXONE", "RPG");
+		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC/PS4/XBOXONE", "Deporte");
+		productoR.save(producto);
+		productoR.save(producto2);
+		
+		Valoracion v1 = new Valoracion("Pepe","Muy contento con la compra");
+		Valoracion v3 = new Valoracion("Pepe","Muy contento con la compra");
+		Valoracion v2 = new Valoracion("Pepa","Muy disgustada con la compra");
+		
+		v1.setProductoH(producto);
+		v2.setProductoH(producto);
+		
+		v3.setProductoH(producto2);
+		
+		valoracionR.save(v1);
+		valoracionR.save(v2);
+		valoracionR.save(v3);
 	}
 	
 	@GetMapping("/")
@@ -163,13 +183,14 @@ public class WebController {
 		return "carrito";
 	}*/
 	
-	@PostMapping("/producto/guardarvaloracion")
-	public String guardarAnuncio(Model model, @RequestParam String nombre,
-			@RequestParam String valoracion, @PathVariable long id) {
-	
-		Producto producto = productoR.findById(id);
 
-		return "ValoracionEnviada";
+	@PostMapping("/producto/guardarvaloracion")
+	public String guardarAnuncio(Model model) {
+	
+		model.addAttribute("valoracion", valoracionR.findAll());
+		
+
+		return "mostrarProducto";
 	}
 	
 	

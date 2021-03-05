@@ -1,22 +1,26 @@
 package es.urjc.code.dad.xkeys_web;
 
+//import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
-
-
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "productos")
 public class Producto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	
 	
 	private ArrayList<String> ps4;
 	private ArrayList<String> xboxone;
@@ -26,10 +30,11 @@ public class Producto {
 	private String plataforma; 
     private String categoria;
     
-    protected Producto() {}
-    
-	public Producto(ArrayList<String> ps4, ArrayList<String> xboxone, ArrayList<String> pc, String nombre, int precio, String plataforma, String categoria) {
-		
+    @OneToMany(mappedBy = "productoH")
+	private List<Valoracion> valoracion = new ArrayList<>();
+
+	public Producto(ArrayList<String> ps4, ArrayList<String> xboxone, ArrayList<String> pc, String nombre,
+			int precio, String plataforma, String categoria) {
 		this.ps4 = ps4;
 		this.xboxone = xboxone;
 		this.pc = pc;
@@ -38,6 +43,10 @@ public class Producto {
 		this.plataforma = plataforma;
 		this.categoria = categoria;
 	}
+
+	protected Producto() {
+	}
+
 
 	public long getId() {
 		return id;
@@ -121,10 +130,22 @@ public class Producto {
 		this.categoria = categoria;
 	}
 	
+
+	public List<Valoracion> getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(List<Valoracion> valoracion) {
+		this.valoracion = valoracion;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", ps4=" + ps4 + ", xboxone=" + xboxone + ", pc=" + pc + ", nombre=" + nombre
 				+ ", precio=" + precio + ", plataforma=" + plataforma + ", categoria=" + categoria + "]";
 	}
+	
+	
+	//private static final long serialVersionUID = 1L;
     
 }
