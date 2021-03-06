@@ -1,4 +1,4 @@
-package es.urjc.code.dad.xkeys_web;
+package es.urjc.code.dad.xkeys_web.model;
 
 import java.util.ArrayList;
 
@@ -60,5 +60,4 @@ public class Carrito {
 		carrito.clear();
 		precioTotal= 0;
 	}
-
 }

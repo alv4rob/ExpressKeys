@@ -1,6 +1,5 @@
-package es.urjc.code.dad.xkeys_web;
+package es.urjc.code.dad.xkeys_web.model;
 
-//import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -20,8 +18,6 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	
 	
 	private ArrayList<String> clave;
 	private String nombre;
@@ -41,9 +37,7 @@ public class Producto {
 		this.categoria = categoria;
 	}
 
-	protected Producto() {
-	}
-
+	protected Producto() {}
 
 	public long getId() {
 		return id;
@@ -52,8 +46,7 @@ public class Producto {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
+		
 	public String comprarClave() {
 		String e = clave.get(0);
 		clave.remove(0);
@@ -100,7 +93,6 @@ public class Producto {
 		this.categoria = categoria;
 	}
 	
-
 	public List<Valoracion> getValoracion() {
 		return valoracion;
 	}
@@ -118,8 +110,5 @@ public class Producto {
 	public String toString() {
 		return "Producto [id=" + id + ", Clave=" + clave + ", nombre=" + nombre
 				+ ", precio=" + precio + ", plataforma=" + plataforma + ", categoria=" + categoria + "]";
-	}
-	
-	
-    
+	}    
 }

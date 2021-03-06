@@ -1,12 +1,9 @@
-package es.urjc.code.dad.xkeys_web;
+package es.urjc.code.dad.xkeys_web.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
-
 
 @Entity
 public class Cliente {
@@ -64,6 +61,4 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + contrasena + ", correo=" + correo + "]";
 	}
-
-
 }

@@ -1,4 +1,4 @@
-package es.urjc.code.dad.xkeys_web;
+package es.urjc.code.dad.xkeys_web.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,9 +31,7 @@ public class Valoracion {
 		this.comentario = comentario;
 	}
 
-
-	protected Valoracion() {
-	}
+	protected Valoracion() {}
 	
 	public String getNombre() {
 		return nombre;
@@ -61,17 +59,9 @@ public class Valoracion {
 	public void setProductoH(Producto productoH) {
 		this.productoH = productoH;
 	}
-
-
 	
 	@Override
 	public String toString() {
 		return nombre + ": " + comentario;
-	}
-	
-	
-	//private static final long serialVersionUID = 1L;
-	
-	
-		
+	}		
 }

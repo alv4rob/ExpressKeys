@@ -9,5 +9,4 @@ public class XkeysApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(XkeysApplication.class, args);
 	}
-
 }
