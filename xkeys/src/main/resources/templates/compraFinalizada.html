@@ -1,8 +1,15 @@
 <html>
 <body>
-	<p>En breves te llegaran tus keys a tu correo electronico.</p>
-	<p>{{claves}}</p>
+	<p>En breves te llegaran tu/s key/s a tu correo electronico.</p>
+	<br>
 	
+	Recibo:
+	<br>
+	{{#recibo}}
+	<p>{{.}}</p>
+	{{/recibo}}
+	
+	<br>
 	<a href="/">Aceptar</a>
 </body>
 </html>

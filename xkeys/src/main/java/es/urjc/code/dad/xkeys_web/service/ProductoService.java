@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import es.urjc.code.dad.xkeys_web.model.Producto;
 import es.urjc.code.dad.xkeys_web.repository.ProductoRepository;
 
@@ -15,6 +16,10 @@ public class ProductoService {
 	
 	public Collection<Producto> findAll() {
 		return productos.findAll();
+	}
+	
+	public Collection<Producto> filterByPlataforma(String plataforma) {
+		return productos.filterByPlataforma(plataforma);
 	}
 
 	public Producto findById(long id) {

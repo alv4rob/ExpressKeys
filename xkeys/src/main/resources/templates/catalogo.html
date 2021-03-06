@@ -1,17 +1,24 @@
 <html>
 <body>
-
-
 	<h1>Productos</h1>
+
+	<h3>Filtrar por:</h3>
+	<form action="">
+        <p>Plataforma</p>
+        <input type='checkbox' name='filtroPc' value="1">PC <br>
+        <input type='checkbox' name='filtroPs4' value='1'>PS4 <br>
+        <input type='checkbox' name='filtroXboxone' value='1'>XBOX ONE <br>
+        
+        <input type='submit' value='Enviar'/>
+    </form>
+    
 	{{#productos}}
-	<a href="/producto/{{id}}">{{nombre}} - {{plataforma}}</a>  {{precio}} euros  <br>
+	<a href="/producto/{{id}}">{{nombre}} - {{plataforma}}</a>  {{precio}} euros  <br><br>
 	{{/productos}}
 	
 	{{^productos}}
 	<p>Sin productos aun.</p>
 	{{/productos}}
-
-
 
 </body>
 </html>

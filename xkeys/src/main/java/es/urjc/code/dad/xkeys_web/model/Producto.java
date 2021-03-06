@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "productos")
+@Table(name = "Productos")
 public class Producto {
 
 	@Id
@@ -105,10 +105,21 @@ public class Producto {
         valoracion.add(valoraciones);
         valoraciones.setProductoH(this);
     }
-
+	
+	public boolean sonIguales (Producto p) {
+		
+		if (this.getClave().get(0).equals(p.getClave().get(0))) {
+			
+			return true;
+		}
+		else {
+			return false;
+		}				
+	}
+	
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", Clave=" + clave + ", nombre=" + nombre
 				+ ", precio=" + precio + ", plataforma=" + plataforma + ", categoria=" + categoria + "]";
-	}    
+	}	
 }

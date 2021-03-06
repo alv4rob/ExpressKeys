@@ -1,7 +1,7 @@
 <html>
 <body>
     <h3>Info del juego</h3>
-    <p>Keys: {{producto.clave}}</p>
+    <p>[Depuracion] Keys: {{producto.clave}}</p>
 	<p>Nombre: {{producto.nombre}}</p>
 	<p>Precio: {{producto.precio}}</p>
 	<p>Plataforma: {{producto.plataforma}}</p>
@@ -23,19 +23,19 @@
 	
 	 <h3>Valoraciones</h3>
 	 {{#producto.valoracion}}
-	<p>	{{.}}</p>
+	<p>{{.}}</p>
 	{{/producto.valoracion}}
 	
     {{^producto.valoracion}}
-	<p> No hay valoraciones </p>
+	<p>No hay valoraciones</p>
 	{{/producto.valoracion}}
-    
-	
-	<a href="/producto/{{producto.id}}/eliminar">Eliminar producto</a>
-	<br>
+    	
 	<a href="/producto/{{producto.id}}/introducirValoracion">Dejar valoracion</a>
 	
-	<br>
+	<br><br><br>
+	<a href="/producto/{{producto.id}}/eliminar">Eliminar producto</a>
+	
+	<br><br>
 	<a href="/">Atras</a>
 </body>
 </html>

@@ -1,18 +1,16 @@
 <html>
 <body>
-
-
 	<h1>Clientes</h1>
+	
 	{{#clientes}}
-	<a href="/clientes/{{id}}">{{nombre}}</a> <br>
+	<a href="/clientes/{{id}}">{{nombre}}</a> <br><br>
 	{{/clientes}}
 	
 	{{^clientes}}
 	<p>Sin clientes aun.</p>
 	{{/clientes}}
 	
-	
-	<br>
+	<br><br>
 	<a href="/">Atras</a>
 
 </body>

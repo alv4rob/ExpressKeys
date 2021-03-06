@@ -48,13 +48,14 @@ public class WebController {
 	
 	@PostConstruct
 	public void initPV() {
-		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), "Cyberpunk 2077", 70, "PC/PS4/XBOXONE", "RPG");
-		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC/PS4/XBOXONE", "Deporte");
-		//Producto producto3 =new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PC/PS4/XBOXONE/Switch", "Sandbox");
+		
+		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), "Cyberpunk 2077", 70, "PC", "RPG");
+		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC", "Deporte");
+		Producto producto3 =new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PS4", "Sandbox");
 		
 		productoS.save(producto);
 		productoS.save(producto2);
-		//productoR.save(producto3);
+		productoS.save(producto3);
 		
 		Valoracion v1 = new Valoracion("Pepe","Muy contento con la compra");
 		Valoracion v3 = new Valoracion("Pepe","Muy contento con la compra");
@@ -62,7 +63,6 @@ public class WebController {
 		
 		v1.setProductoH(producto);
 		v2.setProductoH(producto);
-		
 		v3.setProductoH(producto2);
 		
 		valoracionS.save(v1);
@@ -73,12 +73,17 @@ public class WebController {
 	
 	@GetMapping("/")
 	public String mostrarProductos(Model model, HttpSession sesion) {
-
-		
+	
 		model.addAttribute("bienvenida", sesion.isNew());
-		model.addAttribute("n", carrito.nCarrito());		
+		
+		model.addAttribute("n", carrito.nCarrito());	
+		
 		model.addAttribute("productos", productoS.findAll());
-
+		
+		/*if (true) {
+		    model.addAttribute("productos", productoS.filterByPlataforma("PC"));
+		}*/
+			
 		return "index";
 	}
 	
@@ -95,6 +100,18 @@ public class WebController {
 	}
 	
 
+	// [PRODUCTOS]
+	//--------------------------------------------------------------------------------------
+	
+	
+	@PostMapping("/producto/nuevo")
+	public String nuevoProducto(Model model, Producto producto) {
+
+		productoS.save(producto);
+		return "productoGuardado";
+	}
+	
+	
 	@GetMapping("/producto/{id}")
 	public String mostrarProducto(Model model, @PathVariable long id) {
 
@@ -118,15 +135,25 @@ public class WebController {
 	public String añadirCarrito(Model model, @PathVariable long id) {
   
 		Producto producto = productoS.findById(id);
-		/*if(return noAnadidoCarrito) {
-			return "noAnadidoCarrito";
-		}*/
+		
+		
+		for(int i=0; i<carrito.nCarrito(); i++) {
+			
+			Producto aux = carrito.getCarrito().get(i);
+			if (aux.sonIguales(producto)) {
+				return "noAnadidoCarrito";
+			}
+		}
+				
 		carrito.añadirAlCarrito(producto);
-
 		return "anadidoCarrito";
-	}
+    }
 	
 
+	// [CLIENTES]
+	//--------------------------------------------------------------------------------------
+	
+	
 	@GetMapping("/clientes")
 	public String mostrarClientes(Model model) {
 
@@ -165,16 +192,10 @@ public class WebController {
 	}
 	
 	
-	@GetMapping("/carrito")
-	public String mostrarCarrito(Model model) {
-
-		//model.addAttribute("precioTotal", carrito.getPrecioTotal());
-		model.addAttribute("carrito", carrito);
-
-		return "carrito";
-	}
+	// [VALORACIONES]
+	//--------------------------------------------------------------------------------------
 	
-
+	
 	@GetMapping("/producto/{id}/introducirValoracion")
 	public String guardarAnuncio(Model model,@PathVariable long id) {
 		
@@ -203,25 +224,31 @@ public class WebController {
 	}
 	
 	
-	@PostMapping("/producto/nuevo")
-	public String nuevoProducto(Model model, Producto producto) {
+	// [CARRITO/COMPRA]
+	//--------------------------------------------------------------------------------------
+	
+	
+	@GetMapping("/carrito")
+	public String mostrarCarrito(Model model) {
 
-		productoS.save(producto);
-		return "productoGuardado";
+		//model.addAttribute("precioTotal", carrito.getPrecioTotal());
+		model.addAttribute("carrito", carrito);
+
+		return "carrito";
 	}
 	
 	
 	@GetMapping("/comprar")
 	public String comprar(Model model) {
 
-		String claveComprada = "/";
+		ArrayList<String> recibo = new ArrayList<>();
 		for(Producto x: carrito.getCarrito()) {
-			claveComprada = claveComprada + x.comprarClave() + "/";
+			recibo.add(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
 			productoS.save(x);
 		}
 		
 		carrito.VaciarCarro();
-		model.addAttribute("claves", claveComprada);
+		model.addAttribute("recibo", recibo);
 
 		return "compraFinalizada";
 	}
