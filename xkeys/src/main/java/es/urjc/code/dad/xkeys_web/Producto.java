@@ -23,9 +23,7 @@ public class Producto {
 	
 	
 	
-	private ArrayList<String> ps4;
-	private ArrayList<String> xboxone;
-	private ArrayList<String> pc;
+	private ArrayList<String> clave;
 	private String nombre;
 	private int precio;
 	private String plataforma; 
@@ -34,11 +32,9 @@ public class Producto {
     @OneToMany(mappedBy = "productoH", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Valoracion> valoracion = new ArrayList<>();
 
-	public Producto(ArrayList<String> ps4, ArrayList<String> xboxone, ArrayList<String> pc, String nombre,
+	public Producto(ArrayList<String> clave, String nombre,
 			int precio, String plataforma, String categoria) {
-		this.ps4 = ps4;
-		this.xboxone = xboxone;
-		this.pc = pc;
+		this.clave = clave;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.plataforma = plataforma;
@@ -57,46 +53,19 @@ public class Producto {
 		this.id = id;
 	}
 	
-	public String comprarKeyPs4() {
-		String e = ps4.get(0);
-		ps4.remove(0);
+	
+	public String comprarClave() {
+		String e = clave.get(0);
+		clave.remove(0);
 		return e;
 	}
-	
-	public String comprarKeyXboxone() {
-		String e = xboxone.get(0);
-		xboxone.remove(0);
-		return e;
-	}
-	
-	public String comprarKeyPc() {
-		String e = pc.get(0);
-		pc.remove(0);
-		return e;
-	}
-	
-	public ArrayList<String> getPs4() {
-		return ps4;
+
+	public ArrayList<String> getClave() {
+		return clave;
 	}
 
-	public void setPs4(ArrayList<String> ps4) {
-		this.ps4 = ps4;
-	}
-
-	public ArrayList<String> getXboxone() {
-		return xboxone;
-	}
-
-	public void setXboxone(ArrayList<String> xboxone) {
-		this.xboxone = xboxone;
-	}
-
-	public ArrayList<String> getPc() {
-		return pc;
-	}
-
-	public void setPc(ArrayList<String> pc) {
-		this.pc = pc;
+	public void setClave(ArrayList<String> clave) {
+		this.clave = clave;
 	}
 
 	public String getNombre() {
@@ -147,11 +116,10 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", ps4=" + ps4 + ", xboxone=" + xboxone + ", pc=" + pc + ", nombre=" + nombre
+		return "Producto [id=" + id + ", Clave=" + clave + ", nombre=" + nombre
 				+ ", precio=" + precio + ", plataforma=" + plataforma + ", categoria=" + categoria + "]";
 	}
 	
 	
-	//private static final long serialVersionUID = 1L;
     
 }

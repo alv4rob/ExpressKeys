@@ -55,5 +55,10 @@ public class Carrito {
 		
 		return carrito.size()==0;
 	}
+	
+	public void VaciarCarro() {
+		carrito.clear();
+		precioTotal= 0;
+	}
 
 }

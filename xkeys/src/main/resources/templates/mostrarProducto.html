@@ -1,9 +1,7 @@
 <html>
 <body>
     <h3>Info del juego</h3>
-    <p>Keys ps4: {{producto.ps4}}</p>
-    <p>Keys xbox: {{producto.xboxone}}</p>
-    <p>Keys pc: {{producto.pc}}</p>
+    <p>Keys: {{producto.clave}}</p>
 	<p>Nombre: {{producto.nombre}}</p>
 	<p>Precio: {{producto.precio}}</p>
 	<p>Plataforma: {{producto.plataforma}}</p>
@@ -11,32 +9,15 @@
 		
 	<p>----------------------------------<p>
 		
-	<h3>PC</h3>
-	{{#producto.pc.isEmpty}}
+	<h3>Comprar</h3>
+	{{#producto.clave.isEmpty}}
 	<p>Sin stock<p>
-	{{/producto.pc.isEmpty}}
+	{{/producto.clave.isEmpty}}
 	
-    {{^producto.pc.isEmpty}}
+    {{^producto.clave.isEmpty}}
 	<a href="/producto/{{producto.id}}/anadido">Agregar al carrito</a>
-	{{/producto.pc.isEmpty}}
+	{{/producto.clave.isEmpty}}
 	
-	<h3>PS4</h3>
-	{{#producto.ps4.isEmpty}}
-	<p>Sin stock<p>
-	{{/producto.ps4.isEmpty}}
-	
-    {{^producto.ps4.isEmpty}}
-	<p>Con stock<p>
-	{{/producto.ps4.isEmpty}}
-	
-	<h3>XBOXONE</h3>
-	{{#producto.xboxone.isEmpty}}
-	<p>Sin stock<p>
-	{{/producto.xboxone.isEmpty}}
-	
-    {{^producto.xboxone.isEmpty}}
-	<p>Con stock<p>
-	{{/producto.xboxone.isEmpty}}
 	
 	<p>----------------------------------<p>
 	
