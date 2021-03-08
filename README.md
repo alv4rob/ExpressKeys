@@ -101,3 +101,9 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 * Compra finalizada: Pantalla de aviso de que la compra ha sido completada. Se adjunta un recibo con los productos comprados y su key. Lleva de vuelta a la Página principal.
 <p align="center">
 <img src="imagenes/CompraFinalizada.png">
+
+# Diagrama de navegación
+
+Una vez vista cada una de las pantallas, a continuación se adjunta el diagrama de navegación de las mismas:
+<p align="center">
+<img src="imagenes/.png">
