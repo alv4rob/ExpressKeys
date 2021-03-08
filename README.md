@@ -106,4 +106,4 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 
 Una vez vista cada una de las pantallas, a continuación se adjunta el diagrama de navegación de las mismas:
 <p align="center">
-<img src="imagenes/.png">
+<img src="imagenes/DiagramaDeNavegacion.png">
