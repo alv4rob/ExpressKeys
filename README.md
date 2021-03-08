@@ -88,11 +88,11 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
   
 * Introducción de valoración: Pantalla en la que añadir el nombre y contenido de una valoración para un producto.
 <p align="center">
-<img src="imagenes/IntroduccionDeValoracion.png"> 
+<img src="imagenes/IntroduccionDeValoración.png"> 
 
 * Valoración enviada: Pantalla de aviso de que una valoración ha sido registrada. Lleva de vuelta a la Página de producto.
 <p align="center">
-<img src="imagenes/ValoracionEnviada.png">
+<img src="imagenes/ValoraciónEnviada.png">
   
 * Página del carrito: Pantalla que contiene los productos que se encuentran en el carrito en un momento dado junto a la suma total a pagar. Permite volver a la Página principal o acceder a comprar.
 <p align="center">
