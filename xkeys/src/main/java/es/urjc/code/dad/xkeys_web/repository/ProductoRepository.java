@@ -11,7 +11,15 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	
 	Producto findById(long id);
 	
-	@Query("SELECT id FROM Producto WHERE plataforma='PC'")
-	List<Producto> filterByPlataforma(String plafatorma);	
-
+	@Query("SELECT p FROM Producto p WHERE p.plataforma= ?1")
+	List<Producto> filterByPlataforma(String plataforma);	
+	
+	@Query("SELECT p FROM Producto p WHERE p.precio >= ?1 AND p.precio <= ?2")
+	List<Producto> filterByPrecio(int precio, int precio2);
+	
+	@Query("SELECT p FROM Producto p WHERE p.categoria= ?1")
+	List<Producto> filterByCategoria(String categoria);
+	
+	@Query("SELECT p FROM Producto p WHERE p.nombre LIKE ?1%")
+	List<Producto> filterByBusqueda(String busqueda);
 }

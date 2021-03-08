@@ -1,17 +1,37 @@
 <html>
 <body>
 	<h1>Productos</h1>
+	
+	<p>----------------------------------<p>
 
 	<h3>Filtrar por:</h3>
 	<form action="">
         <p>Plataforma</p>
-        <input type='checkbox' name='filtroPc' value="1">PC <br>
-        <input type='checkbox' name='filtroPs4' value='1'>PS4 <br>
-        <input type='checkbox' name='filtroXboxone' value='1'>XBOX ONE <br>
+        <input type='radio' name='filtro' value='PC' />PC <br>
+        <input type='radio' name='filtro' value='PS4' />PS4 <br>
+        <input type='radio' name='filtro' value='XBOX ONE'/>XBOX ONE <br>
         
-        <input type='submit' value='Enviar'/>
+        <p>Precio</p>
+        <input type='radio' name='filtro' value='0' />0-33 euros <br>
+        <input type='radio' name='filtro' value='34' />34-67 euros <br>
+        <input type='radio' name='filtro' value='68'/>68-101 euros <br>
+        
+        <p>Categoria</p>
+        <input type='radio' name='filtro' value='Accion' />Accion <br>
+        <input type='radio' name='filtro' value='Plataformas' />Plataformas <br>
+        <input type='radio' name='filtro' value='Terror'/>Terror <br>
+        <input type='radio' name='filtro' value='Deporte'/>Deporte <br>
+        <input type='radio' name='filtro' value='Simulador'/>Simulador <br>
+        <p><input type='submit' value='Filtrar'/></p>
     </form>
     
+	<p>----------------------------------<p>  
+	
+	<form action=""> 
+  		<p>Busqueda</p>
+  		<input type='search' name='busqueda'/> <input type='submit' value='Buscar'/> <br><br>			
+	</form>
+  
 	{{#productos}}
 	<a href="/producto/{{id}}">{{nombre}} - {{plataforma}}</a>  {{precio}} euros  <br><br>
 	{{/productos}}

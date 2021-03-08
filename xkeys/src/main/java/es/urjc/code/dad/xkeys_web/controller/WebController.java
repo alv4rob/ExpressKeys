@@ -25,7 +25,6 @@ import es.urjc.code.dad.xkeys_web.service.ValoracionService;
 @Controller
 public class WebController {
 	
-	
 	@Autowired
 	private ValoracionService valoracionS;
 	
@@ -38,41 +37,54 @@ public class WebController {
 	@Autowired
 	private Carrito carrito;
 	
-	
+	Datos estaticos
 	@PostConstruct
-	public void initC() {
+	public void init() {
+		
 		clienteS.save(new Cliente("Pepe", "hola1234", "pepe@gmail.com"));
-		clienteS.save(new Cliente("Pepa", "hola1234564", "pepaa@gmail.com"));
-	}
-	
-	
-	@PostConstruct
-	public void initPV() {
+		clienteS.save(new Cliente("Pepa", "hola1234564", "pepa@gmail.com"));
+		clienteS.save(new Cliente("Pepo", "hola123", "pepo@outlook.com"));
 		
-		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), "Cyberpunk 2077", 70, "PC", "RPG");
-		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC", "Deporte");
-		Producto producto3 =new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PS4", "Sandbox");
-		
+		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), "Cyberpunk 2077", 70, "PC", "Accion");
 		productoS.save(producto);
+		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC", "Deporte");
 		productoS.save(producto2);
+		Producto producto3 =new Producto(new ArrayList<>(Arrays.asList("minecraftps41", "minecraftps42", "minecraftps413")), "Minecraft", 20, "PS4", "Plataformas");
 		productoS.save(producto3);
-		
+		Producto producto4 =new Producto(new ArrayList<>(Arrays.asList("flightsimu123", "flightsimu456", "minecraftps789")), "Flight Simulator 2020 Deluxe Edition", 90, "PC", "Simulador");
+		productoS.save(producto4);
+		Producto producto5 =new Producto(new ArrayList<>(Arrays.asList("re32434", "re34566", "re11111")), "Resident Evil 7", 50, "XBOX ONE", "Terror");
+		productoS.save(producto5);
+		Producto producto6 =new Producto(new ArrayList<>(Arrays.asList("forza7654", "forza7543", "forza7341")), "Forza Motosport 7", 60, "XBOX ONE", "Deporte");
+		productoS.save(producto6);
+		Producto producto7 =new Producto(new ArrayList<>(Arrays.asList("bus49504", "bus39405", "bus20394")), "Bus Simulator 18", 15, "PC", "Simulador");
+		productoS.save(producto7);
+		Producto producto8 =new Producto(new ArrayList<>(Arrays.asList("control412341", "control323454", "control094933")), "Control", 15, "XBOX ONE", "Accion");
+		productoS.save(producto8);
+
 		Valoracion v1 = new Valoracion("Pepe","Muy contento con la compra");
-		Valoracion v3 = new Valoracion("Pepe","Muy contento con la compra");
-		Valoracion v2 = new Valoracion("Pepa","Muy disgustada con la compra");
-		
-		v1.setProductoH(producto);
-		v2.setProductoH(producto);
-		v3.setProductoH(producto2);
-		
+		v1.setProductoH(producto);	
 		valoracionS.save(v1);
+		Valoracion v2 = new Valoracion("Pepa","Hay un juego en este bug");
+		v2.setProductoH(producto);
 		valoracionS.save(v2);
+		Valoracion v3 = new Valoracion("Pepe","Un poco igual al 20 no?");
+		v3.setProductoH(producto2);
 		valoracionS.save(v3);
+		Valoracion v4 = new Valoracion("Pepo","Mucho susto");
+		v4.setProductoH(producto5);	
+		valoracionS.save(v4);
+		Valoracion v5 = new Valoracion("Pepa","Fui a sobrevolar mi casa y me estrellé sin querer");
+		v5.setProductoH(producto4);	
+		valoracionS.save(v5);
+		Valoracion v6 = new Valoracion("Pepo","Los pasos de cebra están mal pintados");
+		v6.setProductoH(producto7);	
+		valoracionS.save(v6);
 	}
 	
 	
 	@GetMapping("/")
-	public String mostrarProductos(Model model, HttpSession sesion) {
+	public String mostrarProductos(Model model, HttpSession sesion, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {
 	
 		model.addAttribute("bienvenida", sesion.isNew());
 		
@@ -80,10 +92,22 @@ public class WebController {
 		
 		model.addAttribute("productos", productoS.findAll());
 		
-		/*if (true) {
-		    model.addAttribute("productos", productoS.filterByPlataforma("PC"));
-		}*/
-			
+		if (filtro.equals("PC")||filtro.equals("PS4")||filtro.equals("XBOX ONE")) {
+		    model.addAttribute("productos", productoS.filterByPlataforma(filtro));
+		}
+		
+		if (filtro.equals("0")||filtro.equals("34")||filtro.equals("68")) {
+		    model.addAttribute("productos", productoS.filterByPrecio(Integer.parseInt(filtro), Integer.parseInt(filtro)+33));
+		}
+		
+		if (filtro.equals("Accion")||filtro.equals("Plataformas")||filtro.equals("Terror")||filtro.equals("Deporte")||filtro.equals("Simulador")) {
+	    model.addAttribute("productos", productoS.filterByCategoria(filtro));
+	    }
+		
+		if (!busqueda.equals("false")) {
+		    model.addAttribute("productos", productoS.filterByBusqueda(busqueda));
+		}
+
 		return "index";
 	}
 	
@@ -98,10 +122,6 @@ public class WebController {
 		
 		return "logged";
 	}
-	
-
-	// [PRODUCTOS]
-	//--------------------------------------------------------------------------------------
 	
 	
 	@PostMapping("/producto/nuevo")
@@ -149,10 +169,6 @@ public class WebController {
 		return "anadidoCarrito";
     }
 	
-
-	// [CLIENTES]
-	//--------------------------------------------------------------------------------------
-	
 	
 	@GetMapping("/clientes")
 	public String mostrarClientes(Model model) {
@@ -190,11 +206,7 @@ public class WebController {
 
 		return "clienteEliminado";
 	}
-	
-	
-	// [VALORACIONES]
-	//--------------------------------------------------------------------------------------
-	
+		
 	
 	@GetMapping("/producto/{id}/introducirValoracion")
 	public String guardarAnuncio(Model model,@PathVariable long id) {
@@ -224,14 +236,9 @@ public class WebController {
 	}
 	
 	
-	// [CARRITO/COMPRA]
-	//--------------------------------------------------------------------------------------
-	
-	
 	@GetMapping("/carrito")
 	public String mostrarCarrito(Model model) {
 
-		//model.addAttribute("precioTotal", carrito.getPrecioTotal());
 		model.addAttribute("carrito", carrito);
 
 		return "carrito";
