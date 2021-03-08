@@ -37,7 +37,7 @@ public class WebController {
 	@Autowired
 	private Carrito carrito;
 	
-	Datos estaticos
+	
 	@PostConstruct
 	public void init() {
 		
