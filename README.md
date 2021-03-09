@@ -113,5 +113,6 @@ Una vez vista cada una de las pantallas, a continuación se adjunta el diagrama 
 <img src="imagenes/DiagramaEntidadRelacion.PNG">
 
 # Diagrama UML
+Por último adjuntamos una imagen con el diagrama UML:
 <p align="center">
 <img src="imagenes/DiagramaUML.png">
