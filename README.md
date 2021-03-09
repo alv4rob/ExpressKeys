@@ -114,4 +114,4 @@ Una vez vista cada una de las pantallas, a continuación se adjunta el diagrama 
 
 # Diagrama UML
 <p align="center">
-<img src="imagenes/DiagramaUML.PNG">
+<img src="imagenes/DiagramaUML.png">
