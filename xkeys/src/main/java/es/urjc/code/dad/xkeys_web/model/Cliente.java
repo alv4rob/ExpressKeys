@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "Clientes")
@@ -17,6 +19,10 @@ public class Cliente {
 	private String nombre;
 	private String contrasena;
 	private String correo;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Carrito carritoH;
+	
 	
 	protected Cliente() {}
 	
@@ -57,6 +63,15 @@ public class Cliente {
 
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
+	}
+	
+
+	public Carrito getCarritoH() {
+		return carritoH;
+	}
+
+	public void setCarritoH(Carrito carritoH) {
+		this.carritoH = carritoH;
 	}
 
 	@Override
