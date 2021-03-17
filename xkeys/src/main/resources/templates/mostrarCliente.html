@@ -7,7 +7,12 @@
 	
 	<p>Historial de compra: </p>
 	
-	<p>{{cliente.historial}}</p>
+	{{#cliente.historial}}
+	<p>{{.}}</p>
+	{{/cliente.historial}}
+	{{^cliente.historial}}
+	<p>No hay productos comprados.</p>
+	{{/cliente.historial}}
 	
 	<br><br>
 	<a href="/clientes/{{cliente.id}}/eliminar">Eliminar cliente</a>

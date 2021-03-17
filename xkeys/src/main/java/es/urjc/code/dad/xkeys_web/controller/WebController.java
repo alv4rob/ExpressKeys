@@ -1,5 +1,6 @@
 package es.urjc.code.dad.xkeys_web.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +62,15 @@ public class WebController {
 	}
 	
 
-	
 	@PostMapping("/login")
-	public String login(Model model, @RequestParam String user, HttpSession sesion) {
+	public String login(Model model, @RequestParam String user, HttpServletRequest servlet) {
+				
+		Cliente c = clienteS.findByNombre(user);
 		
-		Cliente c= clienteS.findByNombre(user);
-		sesion.setAttribute(user, c);
-		model.addAttribute("user", user);
+		HttpSession sesion = servlet.getSession();
+		sesion.setAttribute("usr", c);
+		
+		model.addAttribute("user", c.getNombre());
 		model.addAttribute("n", carrito.nCarrito());
 		model.addAttribute("productos", productoS.findAll());
 		

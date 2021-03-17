@@ -2,6 +2,7 @@ package es.urjc.code.dad.xkeys_web.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,19 +37,19 @@ public class CarritoController {
 	}
 	
 	@GetMapping("/comprar")
-	public String comprar(Model model, HttpSession sesion) {
-
-		Cliente c= (Cliente) sesion.getAttribute("user");
+	public String comprar(Model model, HttpServletRequest servlet) {
+		HttpSession sesion = servlet.getSession();
+		Cliente c = (Cliente) sesion.getAttribute("usr");
 		ArrayList<String> recibo = new ArrayList<>();
 		for(Producto x: carrito.getCarrito()) {
 			
-			//c.añadirAlHistorial(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
-			//cliente.getHistorial().add(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
-			recibo.add(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
-			recibo.add(c.getNombre());
-			productoS.save(x);
-			clienteS.save(c);
+			if (c!=null) {
+			    c.añadirAlHistorial(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.getClave().get(0));
+			    clienteS.save(c);
+			}
 			
+			recibo.add(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
+			productoS.save(x);
 		}
 		
 		carrito.VaciarCarro();
