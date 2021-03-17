@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjc.code.dad.xkeys_web.model.Carrito;
+import es.urjc.code.dad.xkeys_web.model.Cliente;
+import es.urjc.code.dad.xkeys_web.model.Producto;
+import es.urjc.code.dad.xkeys_web.service.ClienteService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
 
 
@@ -21,6 +24,9 @@ public class WebController {
 	private ProductoService productoS;
 	
 	@Autowired
+	private ClienteService clienteS;
+	
+	@Autowired
 	private Carrito carrito;
 	
 	
@@ -30,7 +36,7 @@ public class WebController {
 	public String mostrarProductos(Model model, HttpSession sesion, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {
 	
 		model.addAttribute("bienvenida", sesion.isNew());
-		
+	
 		model.addAttribute("n", carrito.nCarrito());	
 		
 		model.addAttribute("productos", productoS.findAll());
@@ -54,11 +60,14 @@ public class WebController {
 		return "index";
 	}
 	
+
+	
 	@PostMapping("/login")
-	public String login(Model model, @RequestParam String user, @RequestParam String password, HttpSession sesion) {
+	public String login(Model model, @RequestParam String user, HttpSession sesion) {
 		
+		Cliente c= clienteS.findByNombre(user);
+		sesion.setAttribute(user, c);
 		model.addAttribute("user", user);
-		model.addAttribute("password", password);
 		model.addAttribute("n", carrito.nCarrito());
 		model.addAttribute("productos", productoS.findAll());
 		

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.urjc.code.dad.xkeys_web.model.Carrito;
+import es.urjc.code.dad.xkeys_web.model.Cliente;
 import es.urjc.code.dad.xkeys_web.model.Producto;
 import es.urjc.code.dad.xkeys_web.model.Valoracion;
+//import es.urjc.code.dad.xkeys_web.service.CarritoService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
 import es.urjc.code.dad.xkeys_web.service.ValoracionService;
 
@@ -29,7 +31,7 @@ public class ProductoController {
 	
 	@Autowired
 	private ValoracionService valoracionS;
-
+	
 	@PostConstruct
 	public void initProducto() {
 		

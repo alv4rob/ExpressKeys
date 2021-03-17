@@ -5,10 +5,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
+import java.util.ArrayList;
+
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 
 @Entity
+@SessionScope
 @Table(name = "Clientes")
 public class Cliente {
 	
@@ -19,6 +26,7 @@ public class Cliente {
 	private String nombre;
 	private String contrasena;
 	private String correo;
+	private ArrayList<String> historial;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Carrito carritoH;
@@ -31,6 +39,7 @@ public class Cliente {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
 		this.correo=correo;
+		historial = new ArrayList<>();
 	}
 
 	public String getCorreo() {
@@ -73,9 +82,27 @@ public class Cliente {
 	public void setCarritoH(Carrito carritoH) {
 		this.carritoH = carritoH;
 	}
+	
+
+	public ArrayList<String> getHistorial() {
+		return historial;
+	}
+	public void setHistorial(ArrayList<String> historial) {
+		this.historial = historial;
+	}
+	
+	
+	public void añadirAlHistorial(String string) {
+		historial.add(string);		
+	}
+
 
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + contrasena + ", correo=" + correo + "]";
+	}
+	
+	public void añadirAlCarrito(Producto producto) {
+		carritoH.añadirAlCarrito(producto);
 	}
 }

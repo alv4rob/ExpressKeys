@@ -7,5 +7,7 @@ import es.urjc.code.dad.xkeys_web.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	
 	Cliente findById(long id);
+	Cliente findByNombre(String nombre);
+	
 
 }

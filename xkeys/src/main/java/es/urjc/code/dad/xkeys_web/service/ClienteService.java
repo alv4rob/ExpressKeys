@@ -21,6 +21,10 @@ public class ClienteService {
 	public Cliente findById(long id) {
 		return clientes.findById(id);
 	}
+	
+	public Cliente findByNombre(String nombre) {
+		return clientes.findByNombre(nombre);
+	}
 
 	public void save(Cliente cliente) {
 
