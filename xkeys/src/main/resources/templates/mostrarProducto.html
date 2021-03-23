@@ -1,7 +1,9 @@
 <html>
 <body>
     <h3>Info del juego</h3>
-    <p>[Depuracion] Keys: {{producto.clave}}</p>
+    {{#admin}}
+    <p>Keys: {{producto.clave}}</p>
+    {{/admin}}
 	<p>Nombre: {{producto.nombre}}</p>
 	<p>Precio: {{producto.precio}}</p>
 	<p>Plataforma: {{producto.plataforma}}</p>
@@ -36,9 +38,17 @@
 	<p>----------------------------------<p>
 		
 	<br>
+	{{#admin}}
 	<a href="/producto/{{producto.id}}/eliminar">Eliminar producto</a>
+	{{/admin}}
 	
 	<br><br>
+    {{#user}}
+	<a href="/home">Atras</a>
+	{{/user}}
+	
+    {{^user}}
 	<a href="/">Atras</a>
+	{{/user}}
 </body>
 </html>

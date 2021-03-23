@@ -34,11 +34,7 @@ public class WebController {
 	
 	
 	@GetMapping("/")
-	public String mostrarProductos(Model model, HttpSession sesion, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {
-	
-		model.addAttribute("bienvenida", sesion.isNew());
-	
-		model.addAttribute("n", carrito.nCarrito());	
+	public String mostrarProductos(Model model, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {	
 		
 		model.addAttribute("productos", productoS.findAll());
 		
@@ -62,20 +58,56 @@ public class WebController {
 	}
 	
 
-	@PostMapping("/login")
-	public String login(Model model, @RequestParam String user, HttpServletRequest servlet) {
+	@GetMapping("/login")
+	public String login(/*Model model, @RequestParam String username, HttpServletRequest servlet*/) {
 				
-		Cliente c = clienteS.findByNombre(user);
+		/*Cliente c = clienteS.findByNombre(user);
 		
 		HttpSession sesion = servlet.getSession();
 		sesion.setAttribute("usr", c);
 		
 		model.addAttribute("user", c.getNombre());
 		model.addAttribute("n", carrito.nCarrito());
-		model.addAttribute("productos", productoS.findAll());
+		model.addAttribute("productos", productoS.findAll());*/
 		
-		return "logged";
+		return "login";
 	}
 	
-	
+    @GetMapping("/loginerror")
+    public String loginerror() {
+    	return "loginerror";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model, HttpServletRequest request, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {
+    	
+    	model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    	
+    	model.addAttribute("n", carrito.nCarrito()); //??
+    	
+		model.addAttribute("productos", productoS.findAll());
+		
+		if (filtro.equals("PC")||filtro.equals("PS4")||filtro.equals("XBOX ONE")) {
+		    model.addAttribute("productos", productoS.filterByPlataforma(filtro));
+		}
+		
+		if (filtro.equals("0")||filtro.equals("34")||filtro.equals("68")) {
+		    model.addAttribute("productos", productoS.filterByPrecio(Integer.parseInt(filtro), Integer.parseInt(filtro)+33));
+		}
+		
+		if (filtro.equals("Accion")||filtro.equals("Plataformas")||filtro.equals("Terror")||filtro.equals("Deporte")||filtro.equals("Simulador")) {
+	    model.addAttribute("productos", productoS.filterByCategoria(filtro));
+	    }
+		
+		if (!busqueda.equals("false")) {
+		    model.addAttribute("productos", productoS.filterByBusqueda(busqueda));
+		}
+		
+        return "home";
+    }
+    
+    @GetMapping("/admin")
+    public String admin() {
+    	return "admin";
+    }	
 }

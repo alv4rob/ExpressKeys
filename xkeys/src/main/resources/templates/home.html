@@ -1,0 +1,23 @@
+<html>
+<body>
+	 <img src="/imagenes/logo.png" width="200" height="200"/> 
+	 
+
+	 <h1> Bienvenido a EXPRESS KEYS</h1>
+
+	 
+	 <form action="/logout" method='get'>	 
+		 <input type='submit' value='Cerrar sesion' />
+	 </form>
+	 
+	 <br>
+     <h4> <a href="/carrito">Ver carrito ({{n}})</a> </h4>
+     
+     {{#admin}}
+	 <h4> <a href="/admin">Administrar</a> </h4>
+	 {{/admin}}
+	 
+	 {{>catalogo}}
+	 
+</body>
+</html>

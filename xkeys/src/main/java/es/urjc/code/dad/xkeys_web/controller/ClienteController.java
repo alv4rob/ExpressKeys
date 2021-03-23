@@ -41,6 +41,7 @@ public class ClienteController {
 		clienteS.save(cliente3);
 			
 	}
+	
 
 	@GetMapping("/clientes")
 	public String mostrarClientes(Model model) {
@@ -50,7 +51,15 @@ public class ClienteController {
 		return "listaUsuarios";
 	}
 	
-	@PostMapping("/registrarse")
+	
+	@GetMapping("/registro")
+	public String registro() {
+		
+		return "registrarse";
+	}
+	
+	
+	@PostMapping("/registrado")
 	public String nuevoUsuario(Model model, Cliente cliente) {
 
 		Carrito carritoDefault = new Carrito();
@@ -59,17 +68,6 @@ public class ClienteController {
 
 		return "usuarioRegistrado";
 	}
-	
-	/*@PostMapping("/login")
-	public String login(Model model, @RequestParam String user, @RequestParam String password, HttpSession sesion) {
-		
-		model.addAttribute("user", user);
-		model.addAttribute("password", password);
-		model.addAttribute("n", carrito.nCarrito());
-		model.addAttribute("productos", productoS.findAll());
-		
-		return "logged";
-	}*/
 	
 	
 	@GetMapping("/clientes/{id}")
@@ -89,7 +87,5 @@ public class ClienteController {
 		clienteS.deleteById(id);
 
 		return "clienteEliminado";
-	}
-	
-	
+	}	
 }

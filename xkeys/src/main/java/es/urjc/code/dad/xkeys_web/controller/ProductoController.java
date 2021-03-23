@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,6 +74,12 @@ public class ProductoController {
 	}
 	
 	
+	@GetMapping("/producto/nuevo1")
+	public String nuevoProducto1() {
+
+		return "nuevoProducto";
+	}
+	
 	
 	@PostMapping("/producto/nuevo")
 	public String nuevoProducto(Model model, Producto producto) {
@@ -83,8 +90,10 @@ public class ProductoController {
 	
 	
 	@GetMapping("/producto/{id}")
-	public String mostrarProducto(Model model, @PathVariable long id) {
+	public String mostrarProducto(Model model, @PathVariable long id, HttpServletRequest request) {
 
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Producto producto = productoS.findById(id);
 		model.addAttribute("producto", producto);
 
