@@ -1,7 +1,10 @@
 package es.urjc.code.dad.xkeys_web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,18 +33,20 @@ public class ValoracionController {
 	
 	
 	@GetMapping("/producto/{id}/introducirValoracion")
-	public String guardarAnuncio(Model model,@PathVariable long id) {
+	public String guardarAnuncio(Model model,@PathVariable long id,HttpServletRequest request) {
 		
 		Producto producto = productoS.findById(id);
 		model.addAttribute("producto", producto);
 		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		 model.addAttribute("token", token.getToken());
 
 		return "introducirValoracion";
 	}
 	
 	
 	@PostMapping("/producto/{id}/ValoracionEnviada")
-	public  String anadirValoracion(Model model,/* Valoracion valoracion*/Authentication auth, String comentario, @PathVariable long id) {
+	public  String anadirValoracion(Model model,Authentication auth, String comentario, @PathVariable long id) {
 		
 		Cliente cliente = clienteS.findByNombre(auth.getName());
 		Valoracion valoracion = new Valoracion(cliente.getNombre() , comentario);

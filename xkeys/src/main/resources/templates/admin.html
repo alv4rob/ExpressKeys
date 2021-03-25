@@ -3,10 +3,12 @@
 	<h1>Pagina del admin</h1>
 	
     <form action="/clientes" method='get'>
+    <input type="hidden" name="_csrf" value="{{token}}"/>
 	<input type='submit' value='Mostrar usuarios' />
 	</form>
 	   
 	<form action="/producto/nuevo1" method='get'>
+	<input type="hidden" name="_csrf" value="{{token}}"/>
 	<input type='submit' value='Nuevo producto' />
 	</form>
      

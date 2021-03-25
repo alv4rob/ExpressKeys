@@ -6,7 +6,8 @@
 	 <h1> Bienvenido a EXPRESS KEYS</h1>
 
 	 
-	 <form action="/logout" method='get'>	 
+	 <form action="/" method='get'>	 
+	 	 <input type="hidden" name="_csrf" value="{{token}}"/>
 		 <input type='submit' value='Cerrar sesion' />
 	 </form>
 	 

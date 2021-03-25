@@ -2,8 +2,10 @@ package es.urjc.code.dad.xkeys_web.controller;
 
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,18 +53,24 @@ public class ClienteController {
 	
 	
 	@GetMapping("/registro")
-	public String registro() {
+	public String registro(Model model,HttpServletRequest request) {
 		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		 model.addAttribute("token", token.getToken());
 		return "registrarse";
 	}
 	
 	
 	@PostMapping("/registrado")
-	public String nuevoUsuario(Model model, Cliente cliente) {
-
+	public String nuevoUsuario(Model model,HttpServletRequest request,String nombre, String contrasena, String correo, String... roles) {
+		Cliente cliente = new Cliente(nombre, contrasena, correo,  roles);
 		Carrito carritoDefault = new Carrito();
 		cliente.setCarritoH(carritoDefault);
 		clienteS.save(cliente);
+		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		 model.addAttribute("token", token.getToken());
+		
 
 		return "usuarioRegistrado";
 	}

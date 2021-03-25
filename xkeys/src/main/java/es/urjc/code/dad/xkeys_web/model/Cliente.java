@@ -49,6 +49,8 @@ public class Cliente {
 		historial = new ArrayList<>();
 		this.roles = new ArrayList<>(Arrays.asList(roles));
 	}
+	
+
 
 	public String getCorreo() {
 		return correo;

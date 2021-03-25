@@ -15,8 +15,10 @@
 		
 		<p>Correo:</p>
 		<input type='text' name='correo' required/>
+		<input type='hidden' name='roles' value ='ROLE_USER'>
 		<br>
 		<br>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
 		<input type='submit' value='Guardar'/>
 	</form>
 	</div> 
