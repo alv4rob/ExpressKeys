@@ -1,6 +1,6 @@
 <html>
 <body>
-	<h3>Ficha del cliente</h3>
+	<h3>Mi perfil</h3>
     <p>ID: {{cliente.id}}</p>
 	<p>Nombre: {{cliente.nombre}}</p>
 	<p>Correo: {{cliente.correo}}</p>
@@ -15,12 +15,8 @@
 	{{/cliente.historial}}
 	
 	<br><br>
-	{{#admin}}
-	<a href="/clientes/{{cliente.id}}/eliminar">Eliminar cliente</a>
-	{{/admin}}
-	 
-	<br><br>
-	<a href="/clientes">Atras</a>
 
+	<a href="/home">Atras</a>
+	
 </body>
 </html>

@@ -1,7 +1,6 @@
 package es.urjc.code.dad.xkeys_web.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,10 +8,10 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import es.urjc.code.dad.xkeys_web.model.Carrito;
+
 import es.urjc.code.dad.xkeys_web.model.Cliente;
+import es.urjc.code.dad.xkeys_web.service.CarritoService;
 import es.urjc.code.dad.xkeys_web.service.ClienteService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
 
@@ -27,8 +26,8 @@ public class WebController {
 	@Autowired
 	private ClienteService clienteS;
 
-	
-	
+	@Autowired
+	private CarritoService carritoS;
 	
 	
 	@GetMapping("/")
@@ -75,14 +74,17 @@ public class WebController {
     }
 
     @GetMapping("/home")
-    public String home(Model model,Authentication auth, HttpServletRequest request, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {
+    public String home(Model model, Authentication auth, HttpServletRequest request, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda) {
     	
     	
     	model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    	model.addAttribute("user", request.isUserInRole("USER"));
     	
     	Cliente cliente = clienteS.findByNombre(auth.getName());
    
-    	model.addAttribute("n", cliente.getCarritoH().nCarrito()); //??
+    	model.addAttribute("usuario", cliente.getNombre());
+    	
+    	model.addAttribute("n", cliente.getCarritoH().nCarrito());
     	
 		model.addAttribute("productos", productoS.findAll());
 		
@@ -104,7 +106,7 @@ public class WebController {
 		
 		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		 model.addAttribute("token", token.getToken());
+		model.addAttribute("token", token.getToken());
 		 
         return "home";
     }
@@ -112,7 +114,7 @@ public class WebController {
     @GetMapping("/admin")
     public String admin(Model model,HttpServletRequest request) {
     	CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		 model.addAttribute("token", token.getToken());
+		model.addAttribute("token", token.getToken());
     	return "admin";
     }	
 }

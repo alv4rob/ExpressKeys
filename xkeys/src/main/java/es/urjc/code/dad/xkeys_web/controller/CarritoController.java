@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import es.urjc.code.dad.xkeys_web.model.Carrito;
 import es.urjc.code.dad.xkeys_web.model.Cliente;
 import es.urjc.code.dad.xkeys_web.model.Producto;
+import es.urjc.code.dad.xkeys_web.service.CarritoService;
 import es.urjc.code.dad.xkeys_web.service.ClienteService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
 
@@ -24,7 +25,7 @@ public class CarritoController {
 	private ProductoService productoS;
 	
 	@Autowired
-	private Carrito carrito;
+	private CarritoService carritoS;
 	
 	@Autowired
 	private ClienteService clienteS;
@@ -33,29 +34,40 @@ public class CarritoController {
 	public String mostrarCarrito(Model model, Authentication auth) {
 
 		Cliente cliente = clienteS.findByNombre(auth.getName());
-		model.addAttribute("carrito", cliente.getCarritoH());
+		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
+		
+		ArrayList<Producto> listaCarrito = new ArrayList<>();
+		
+		for (Long x: carrito.getCarrito()) {
+			listaCarrito.add(productoS.findById(x));
+		}
+		model.addAttribute("carrito", listaCarrito);
+		model.addAttribute("precioTotal", carrito.getPrecioTotal());
 
 		return "carrito";
 	}
 	
 	@GetMapping("/comprar")
 	public String comprar(Model model,Authentication auth, HttpServletRequest servlet) {
-		//HttpSession sesion = servlet.getSession();
-		//Cliente c = (Cliente) sesion.getAttribute("usr");
+	
 		Cliente cliente = clienteS.findByNombre(auth.getName());
+		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
 		ArrayList<String> recibo = new ArrayList<>();
-		for(Producto x: cliente.getCarritoH().getCarrito()) {
+		for(Long x: carrito.getCarrito()) {
+			
+			Producto producto = productoS.findById(x);
 			
 			if (cliente!=null) {
-			    cliente.añadirAlHistorial(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.getClave().get(0));
+			    cliente.añadirAlHistorial(producto.getNombre() + " - " + producto.getPlataforma() + " | " + producto.getPrecio() + "euros | Key: " + producto.getClave().get(0));
 			    clienteS.save(cliente);
 			}
 			
-			recibo.add(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
-			productoS.save(x);
+			recibo.add(producto.getNombre() + " - " + producto.getPlataforma() + " | " + producto.getPrecio() + "euros | Key: " + producto.comprarClave());
+			productoS.save(producto);
 		}
 		
 		carrito.VaciarCarro();
+		carritoS.save(carrito);
 		model.addAttribute("recibo", recibo);
 		return "compraFinalizada";
 	}

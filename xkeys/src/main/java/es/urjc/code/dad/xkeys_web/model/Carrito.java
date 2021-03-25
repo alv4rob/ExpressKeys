@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 @Entity
+@SessionScope
 @Component
 public class Carrito {
 	
@@ -22,7 +23,7 @@ public class Carrito {
 	private long id;
 	
 	
-	private ArrayList<Producto> carrito;
+	private ArrayList<Long> carrito;
 	private int precioTotal;
 	
 	
@@ -37,13 +38,13 @@ public class Carrito {
 	}
 	
 	public void añadirAlCarrito(Producto producto) {
-		carrito.add(producto);	
+		carrito.add(producto.getId());	
 		precioTotal = precioTotal + producto.getPrecio();
 		
 	}
 	
 	public void quitarDelCarrito(Producto producto) {
-	    carrito.remove(producto);
+	    carrito.remove(producto.getId());
 	    precioTotal = precioTotal - producto.getPrecio();
 	  
 	}
@@ -60,11 +61,11 @@ public class Carrito {
 		this.precioTotal = precioTotal;
 	}
 
-	public ArrayList<Producto> getCarrito() {
+	public ArrayList<Long> getCarrito() {
 		return carrito;
 	}
 
-	public void setCarrito(ArrayList<Producto> carrito) {
+	public void setCarrito(ArrayList<Long> carrito) {
 		this.carrito = carrito;
 	}
 

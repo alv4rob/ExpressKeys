@@ -1,5 +1,6 @@
 package es.urjc.code.dad.xkeys_web.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Productos")
-public class Producto {
+public class Producto implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

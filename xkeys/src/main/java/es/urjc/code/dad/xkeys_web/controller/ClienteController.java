@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,8 +78,9 @@ public class ClienteController {
 	
 	
 	@GetMapping("/clientes/{id}")
-	public String mostrarCliente(Model model, @PathVariable long id) {
-
+	public String mostrarCliente(Model model, HttpServletRequest request, @PathVariable long id) {
+		
+		
 		Cliente cliente = clienteS.findById(id);
 
 		model.addAttribute("cliente", cliente);
@@ -94,4 +96,15 @@ public class ClienteController {
 
 		return "clienteEliminado";
 	}	
+	
+	@GetMapping("/perfil")
+	public String perfil(Model model, Authentication auth) {
+
+		Cliente cliente = clienteS.findByNombre(auth.getName());
+		
+		model.addAttribute("cliente", cliente);
+
+		return "perfil";
+	}	
+	
 }

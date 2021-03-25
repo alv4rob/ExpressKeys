@@ -128,17 +128,18 @@ public class ProductoController {
   
 		Producto producto = productoS.findById(id);
 		Cliente cliente = clienteS.findByNombre(auth.getName());
+		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
 		
-		for(int i=0; i<cliente.getCarritoH().nCarrito(); i++) {
+		for(int i=0; i<carrito.nCarrito(); i++) {
 			
-			Producto aux = cliente.getCarritoH().getCarrito().get(i);
-			if (aux.sonIguales(producto)) {
+			Long aux = carrito.getCarrito().get(i);
+			if (aux==producto.getId()) {
 				return "noAnadidoCarrito";
 			}
 		}
 				
-		cliente.añadirAlCarrito(producto);
-		clienteS.save(cliente);
+		carrito.añadirAlCarrito(producto);
+		carritoS.save(carrito);
 		return "anadidoCarrito";
     }
 	
