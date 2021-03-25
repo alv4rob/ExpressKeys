@@ -1,5 +1,6 @@
 package es.urjc.code.dad.xkeys_web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	public UserRepositoryAuthenticationProvider authenticationProvider;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -56,11 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder(); 
-		
-	    // User
-	    auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
-	    auth.inMemoryAuthentication().withUser("admin").password(encoder.encode("adminpass")).roles("USER", "ADMIN");
+		auth.authenticationProvider(authenticationProvider);
 
 	    		    	
 	}	

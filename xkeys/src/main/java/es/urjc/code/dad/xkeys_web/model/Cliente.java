@@ -1,17 +1,21 @@
 package es.urjc.code.dad.xkeys_web.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,9 +28,12 @@ public class Cliente {
 	private long id;
 	
 	private String nombre;
-	private String contrasena;
+	private String passwordHash;
 	private String correo;
 	private ArrayList<String> historial;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Carrito carritoH;
@@ -34,12 +41,13 @@ public class Cliente {
 	
 	protected Cliente() {}
 	
-	public Cliente (String nombre, String contrasena, String correo) {
+	public Cliente (String nombre, String contrasena, String correo, String... roles) {
 		
 		this.nombre = nombre;
-		this.contrasena = contrasena;
+		this.passwordHash = new BCryptPasswordEncoder().encode(contrasena);
 		this.correo=correo;
 		historial = new ArrayList<>();
+		this.roles = new ArrayList<>(Arrays.asList(roles));
 	}
 
 	public String getCorreo() {
@@ -66,14 +74,21 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public String getContrasena() {
-		return contrasena;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
-	
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
 
 	public Carrito getCarritoH() {
 		return carritoH;
@@ -99,7 +114,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + contrasena + ", correo=" + correo + "]";
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + passwordHash + ", correo=" + correo + "]";
 	}
 	
 	public void añadirAlCarrito(Producto producto) {

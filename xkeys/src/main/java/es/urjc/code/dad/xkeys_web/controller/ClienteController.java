@@ -1,7 +1,5 @@
 package es.urjc.code.dad.xkeys_web.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
 
@@ -25,17 +23,17 @@ public class ClienteController {
 	@PostConstruct
 	public void initCliente() {
 		
-		Cliente cliente =new Cliente("Pepe", "hola1234", "pepe@gmail.com");
+		Cliente cliente = new Cliente("Pepe", "Hey12345", "pepe@gmail.com", "ROLE_USER");
 		Carrito c1 = new Carrito();
 		cliente.setCarritoH(c1);
 		clienteS.save(cliente);
 		
-		Cliente cliente2 =new Cliente("Pepa", "hola1234564", "pepa@gmail.com");
+		Cliente cliente2 =new Cliente("Pepa", "hola1234564", "pepa@gmail.com", "ROLE_USER");
 		Carrito c2 = new Carrito();
 		cliente2.setCarritoH(c2);
 		clienteS.save(cliente2);
 		
-		Cliente cliente3 =new Cliente("Pepo", "hola123", "pepo@outlook.com");
+		Cliente cliente3 =new Cliente("Pepo", "hola123", "pepo@outlook.com", "ROLE_USER", "ROLE_ADMIN");
 		Carrito c3 = new Carrito();
 		cliente3.setCarritoH(c3);
 		clienteS.save(cliente3);

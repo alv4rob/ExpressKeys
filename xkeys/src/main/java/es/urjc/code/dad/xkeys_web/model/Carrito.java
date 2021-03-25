@@ -1,5 +1,6 @@
 package es.urjc.code.dad.xkeys_web.model;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
@@ -11,10 +12,8 @@ import javax.persistence.OneToOne;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-
-@Component
-@SessionScope
 @Entity
+@Component
 public class Carrito {
 	
 	

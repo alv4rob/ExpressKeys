@@ -1,5 +1,6 @@
 package es.urjc.code.dad.xkeys_web.controller;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -7,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +19,12 @@ import es.urjc.code.dad.xkeys_web.model.Carrito;
 import es.urjc.code.dad.xkeys_web.model.Cliente;
 import es.urjc.code.dad.xkeys_web.model.Producto;
 import es.urjc.code.dad.xkeys_web.model.Valoracion;
+import es.urjc.code.dad.xkeys_web.service.CarritoService;
+import es.urjc.code.dad.xkeys_web.service.ClienteService;
 //import es.urjc.code.dad.xkeys_web.service.CarritoService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
 import es.urjc.code.dad.xkeys_web.service.ValoracionService;
+
 
 @Controller
 public class ProductoController {
@@ -28,10 +33,13 @@ public class ProductoController {
 	private ProductoService productoS;
 	
 	@Autowired
-	private Carrito carrito;
+	private ValoracionService valoracionS;
 	
 	@Autowired
-	private ValoracionService valoracionS;
+	private ClienteService clienteS;
+
+	@Autowired
+	private CarritoService carritoS;
 	
 	@PostConstruct
 	public void initProducto() {
@@ -111,20 +119,21 @@ public class ProductoController {
 	
 	
 	@GetMapping("/producto/{id}/anadido")
-	public String añadirCarrito(Model model, @PathVariable long id) {
+	public String añadirCarrito(Model model,Authentication auth, @PathVariable long id) {
   
 		Producto producto = productoS.findById(id);
+		Cliente cliente = clienteS.findByNombre(auth.getName());
 		
-		
-		for(int i=0; i<carrito.nCarrito(); i++) {
+		for(int i=0; i<cliente.getCarritoH().nCarrito(); i++) {
 			
-			Producto aux = carrito.getCarrito().get(i);
+			Producto aux = cliente.getCarritoH().getCarrito().get(i);
 			if (aux.sonIguales(producto)) {
 				return "noAnadidoCarrito";
 			}
 		}
 				
-		carrito.añadirAlCarrito(producto);
+		cliente.añadirAlCarrito(producto);
+		clienteS.save(cliente);
 		return "anadidoCarrito";
     }
 	

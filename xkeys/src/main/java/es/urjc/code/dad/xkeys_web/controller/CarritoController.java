@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,23 +30,25 @@ public class CarritoController {
 	private ClienteService clienteS;
 	
 	@GetMapping("/carrito")
-	public String mostrarCarrito(Model model) {
+	public String mostrarCarrito(Model model, Authentication auth) {
 
-		model.addAttribute("carrito", carrito);
+		Cliente cliente = clienteS.findByNombre(auth.getName());
+		model.addAttribute("carrito", cliente.getCarritoH());
 
 		return "carrito";
 	}
 	
 	@GetMapping("/comprar")
-	public String comprar(Model model, HttpServletRequest servlet) {
-		HttpSession sesion = servlet.getSession();
-		Cliente c = (Cliente) sesion.getAttribute("usr");
+	public String comprar(Model model,Authentication auth, HttpServletRequest servlet) {
+		//HttpSession sesion = servlet.getSession();
+		//Cliente c = (Cliente) sesion.getAttribute("usr");
+		Cliente cliente = clienteS.findByNombre(auth.getName());
 		ArrayList<String> recibo = new ArrayList<>();
-		for(Producto x: carrito.getCarrito()) {
+		for(Producto x: cliente.getCarritoH().getCarrito()) {
 			
-			if (c!=null) {
-			    c.añadirAlHistorial(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.getClave().get(0));
-			    clienteS.save(c);
+			if (cliente!=null) {
+			    cliente.añadirAlHistorial(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.getClave().get(0));
+			    clienteS.save(cliente);
 			}
 			
 			recibo.add(x.getNombre() + " - " + x.getPlataforma() + " | " + x.getPrecio() + "euros | Key: " + x.comprarClave());
