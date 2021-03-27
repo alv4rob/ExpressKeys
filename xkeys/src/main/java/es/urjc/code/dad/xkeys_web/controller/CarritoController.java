@@ -32,8 +32,6 @@ public class CarritoController {
 	
 	@GetMapping("/carrito")
 	public String mostrarCarrito(Model model, Authentication auth) {
-
-		//si no hay nadie iniciado sesion da error
 		
 		
 		Cliente cliente = clienteS.findByNombre(auth.getName());
