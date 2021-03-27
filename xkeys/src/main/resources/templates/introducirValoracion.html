@@ -1,8 +1,8 @@
 <html>
 <body>
 	<form action="/producto/{{producto.id}}/ValoracionEnviada" method="post">
+		<h3>¿Que opinas de este juego?</h3>
 		<br>
-		<p>Valoracion:</p>
 		<textarea name='comentario' rows=5 cols=40></textarea>
 		<input type="hidden" name="_csrf" value="{{token}}"/>
 		<input type='submit' value='Enviar'/>

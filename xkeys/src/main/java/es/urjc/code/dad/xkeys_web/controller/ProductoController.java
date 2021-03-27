@@ -124,8 +124,7 @@ public class ProductoController {
 	
 	
 	@GetMapping("/producto/{id}/anadido")
-	public String añadirCarrito(Model model,Authentication auth, @PathVariable long id) {
-  
+	public String añadirCarrito(Model model,Authentication auth, @PathVariable long id,HttpServletRequest request) {
 		Producto producto = productoS.findById(id);
 		Cliente cliente = clienteS.findByNombre(auth.getName());
 		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
@@ -141,7 +140,8 @@ public class ProductoController {
 		carrito.añadirAlCarrito(producto);
 		carritoS.save(carrito);
 		return "anadidoCarrito";
-    }
+    
+	}
 	
 	
 	

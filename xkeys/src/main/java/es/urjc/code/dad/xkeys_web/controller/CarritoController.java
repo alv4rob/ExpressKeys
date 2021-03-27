@@ -33,6 +33,9 @@ public class CarritoController {
 	@GetMapping("/carrito")
 	public String mostrarCarrito(Model model, Authentication auth) {
 
+		//si no hay nadie iniciado sesion da error
+		
+		
 		Cliente cliente = clienteS.findByNombre(auth.getName());
 		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
 		
@@ -46,6 +49,7 @@ public class CarritoController {
 
 		return "carrito";
 	}
+	
 	
 	@GetMapping("/comprar")
 	public String comprar(Model model,Authentication auth, HttpServletRequest servlet) {

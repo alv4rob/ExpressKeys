@@ -14,14 +14,23 @@
 		<input type='text' name='nombre' required/>
 		
 		<p>Precio:</p>
-		<input type='text' name='precio' required/>
+		<input type='number' name='precio' required/>
 		
 	    <p>Plataforma:</p>
-		<input type='text' name='plataforma' required/>
+		<select name='plataforma' required>
+		<option>PC</option>
+		<option>PS4</option>
+		<option>XBOX ONE</option>
+		</select>
 		
 		<p>Categoria:</p>
-		<input type='text' name='categoria' required/>
-		
+		<select name='categoria' required>
+		<option>Accion</option>
+		<option>Plataformas</option>
+		<option>Terror</option>
+		<option>Deporte</option>
+		<option>Simulador</option>
+		</select>
 		<br>
 		<br>
 		<input type="hidden" name="_csrf" value="{{token}}"/>
