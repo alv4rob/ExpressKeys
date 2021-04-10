@@ -14,14 +14,14 @@ public class Correo {
 	private final Properties properties;
 	private final Session session;
 	
-	private final String direccionFuente = "expresskeys@gmail.com";
+	private final String direccionFuente = "expresskeysweb@gmail.com";
 	private final String passwordFuente = "dadaprobada";
 	
 	
 	public Correo() {
 		properties = new Properties();
 		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
-		properties.setProperty("mail.smtp.starttks,enable", "true");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
 		properties.setProperty("mail.smtp.port", "587");
 		properties.setProperty("mail.smtp.auth", "true");
 		

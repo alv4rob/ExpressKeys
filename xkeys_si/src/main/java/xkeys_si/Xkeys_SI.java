@@ -43,7 +43,7 @@ public class Xkeys_SI {
 	        	    	Correo correo = new Correo();
 	        	    	correo.enviarCorreo(direccion,"Tu compra de Xkeys",recibo);
 	        	    	System.out.println("[SERVICIO INTERNO] Correo enviado a "+direccion+".");
-	        	    }catch (MessagingException e) {
+	        	    }catch (MessagingException e) {	        	    	
 	        	    	System.out.println ("[SERVICIO INTERNO]Error al enviar el correo.");
 	        	    }
 	        	    
