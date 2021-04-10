@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjc.code.dad.xkeys_web.model.Cliente;
-import es.urjc.code.dad.xkeys_web.service.CarritoService;
 import es.urjc.code.dad.xkeys_web.service.ClienteService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
 
@@ -26,9 +25,6 @@ public class WebController {
 	@Autowired
 	private ClienteService clienteS;
 
-	@Autowired
-	private CarritoService carritoS;
-	
 	
 	@GetMapping("/")
 	public String mostrarProductos(Model model, @RequestParam(defaultValue = "false") String filtro, @RequestParam(defaultValue = "false") String busqueda,HttpServletRequest request) {	

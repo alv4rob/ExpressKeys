@@ -4,19 +4,19 @@
 
 	<h1>Carrito</h1>
 	
-	{{#carrito}}
+	{{#listaCarrito}}
 	Producto: {{nombre}}, Precio: {{precio}}<br>
-	{{/carrito}}
+	{{/listaCarrito}}
 	
-	{{^carrito}}
+	{{^listaCarrito}}
 	<p>El carrito esta vacio.</p>
-	{{/carrito}}
+	{{/listaCarrito}}
 	
 	<br>
-    
+    {{^carrito.esVacio}}
     <p>Precio total: {{precioTotal}}<p>
 	<a href="/comprar">Comprar</a>
-	
+	{{/carrito.esVacio}}
 	<br>
 	<br>
 	<a href="/home">Atras</a>

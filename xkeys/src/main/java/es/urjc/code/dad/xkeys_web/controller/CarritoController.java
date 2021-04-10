@@ -2,9 +2,6 @@ package es.urjc.code.dad.xkeys_web.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -42,7 +39,8 @@ public class CarritoController {
 		for (Long x: carrito.getCarrito()) {
 			listaCarrito.add(productoS.findById(x));
 		}
-		model.addAttribute("carrito", listaCarrito);
+		model.addAttribute("listaCarrito", listaCarrito);
+		model.addAttribute("carrito", carrito);
 		model.addAttribute("precioTotal", carrito.getPrecioTotal());
 
 		return "carrito";
@@ -50,20 +48,20 @@ public class CarritoController {
 	
 	
 	@GetMapping("/comprar")
-	public String comprar(Model model,Authentication auth, HttpServletRequest servlet) {
-	
+	public String comprar(Model model,Authentication auth) {
+		
+					
 		Cliente cliente = clienteS.findByNombre(auth.getName());
 		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
+						    		
 		ArrayList<String> recibo = new ArrayList<>();
 		for(Long x: carrito.getCarrito()) {
-			
+	
 			Producto producto = productoS.findById(x);
-			
-			if (cliente!=null) {
-			    cliente.añadirAlHistorial(producto.getNombre() + " - " + producto.getPlataforma() + " | " + producto.getPrecio() + "euros | Key: " + producto.getClave().get(0));
-			    clienteS.save(cliente);
-			}
-			
+						
+			cliente.añadirAlHistorial(producto.getNombre() + " - " + producto.getPlataforma() + " | " + producto.getPrecio() + "euros | Key: " + producto.getClave().get(0));
+			clienteS.save(cliente);
+						
 			recibo.add(producto.getNombre() + " - " + producto.getPlataforma() + " | " + producto.getPrecio() + "euros | Key: " + producto.comprarClave());
 			productoS.save(producto);
 		}
@@ -71,6 +69,7 @@ public class CarritoController {
 		carrito.VaciarCarro();
 		carritoS.save(carrito);
 		model.addAttribute("recibo", recibo);
-		return "compraFinalizada";
+			
+		return "compraFinalizada";		
 	}
 }

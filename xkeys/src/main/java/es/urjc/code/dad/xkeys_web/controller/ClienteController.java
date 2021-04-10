@@ -26,17 +26,17 @@ public class ClienteController {
 	@PostConstruct
 	public void initCliente() {
 		
-		Cliente cliente = new Cliente("Pepe", "Hey12345", "pepe@gmail.com", "ROLE_USER");
+		Cliente cliente = new Cliente("Pepe", "Hey12345", "pepe@bylup.com", "ROLE_USER");
 		Carrito c1 = new Carrito();
 		cliente.setCarritoH(c1);
 		clienteS.save(cliente);
 		
-		Cliente cliente2 =new Cliente("Pepa", "hola1234564", "pepa@gmail.com", "ROLE_USER");
+		Cliente cliente2 =new Cliente("Pepa", "hola1234564", "pepa@bylup.com", "ROLE_USER");
 		Carrito c2 = new Carrito();
 		cliente2.setCarritoH(c2);
 		clienteS.save(cliente2);
 		
-		Cliente cliente3 =new Cliente("Pepo", "hola123", "pepo@outlook.com", "ROLE_USER", "ROLE_ADMIN");
+		Cliente cliente3 =new Cliente("Pepo", "hola123", "pepo@bylup.com", "ROLE_USER", "ROLE_ADMIN");
 		Carrito c3 = new Carrito();
 		cliente3.setCarritoH(c3);
 		clienteS.save(cliente3);
@@ -83,6 +83,7 @@ public class ClienteController {
 		
 		Cliente cliente = clienteS.findById(id);
 
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("cliente", cliente);
 
 		return "mostrarCliente";

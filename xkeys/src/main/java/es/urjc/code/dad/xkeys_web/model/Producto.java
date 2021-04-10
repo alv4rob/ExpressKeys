@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,6 +26,7 @@ public class Producto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Lob
 	private ArrayList<String> clave;
 	private String nombre;
 	private int precio;
@@ -111,18 +113,7 @@ public class Producto implements Serializable{
         valoracion.add(valoraciones);
         valoraciones.setProductoH(this);
     }
-	
-	public boolean sonIguales (Producto p) {
 		
-		if (this.getClave().get(0).equals(p.getClave().get(0))) {
-			
-			return true;
-		}
-		else {
-			return false;
-		}				
-	}
-	
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", Clave=" + clave + ", nombre=" + nombre

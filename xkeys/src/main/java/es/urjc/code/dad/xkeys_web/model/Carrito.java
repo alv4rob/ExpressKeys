@@ -1,12 +1,12 @@
 package es.urjc.code.dad.xkeys_web.model;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class Carrito {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	
+	@Lob
 	private ArrayList<Long> carrito;
 	private int precioTotal;
 	

@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +31,7 @@ public class Cliente {
 	private String nombre;
 	private String passwordHash;
 	private String correo;
+	@Lob
 	private ArrayList<String> historial;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -117,9 +119,5 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + passwordHash + ", correo=" + correo + "]";
-	}
-	
-	public void añadirAlCarrito(Producto producto) {
-		carritoH.añadirAlCarrito(producto);
 	}
 }
