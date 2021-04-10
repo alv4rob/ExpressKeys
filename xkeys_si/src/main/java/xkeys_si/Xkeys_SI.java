@@ -2,6 +2,8 @@ package xkeys_si;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
+
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -36,7 +38,15 @@ public class Xkeys_SI {
 	        	    String direccion = mensajeSIdiv[0];	        	
 	        	    String recibo = mensajeSIdiv[1];
         	    
-	                //ENVIO DE CORREO
+	             
+	        	    try {
+	        	    	Correo correo = new Correo();
+	        	    	correo.enviarCorreo(direccion,"Tu compra de Xkeys",recibo);
+	        	    	System.out.println("[SERVICIO INTERNO] Correo enviado a "+direccion+".");
+	        	    }catch (MessagingException e) {
+	        	    	System.out.println ("[SERVICIO INTERNO]Error al enviar el correo.");
+	        	    }
+	        	    
 	            }	    	
 	        };
 	        channel.basicConsume(NOMBRE_COLA, true, consumer);
