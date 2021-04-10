@@ -14,6 +14,9 @@ import es.urjc.code.dad.xkeys_web.model.Producto;
 import es.urjc.code.dad.xkeys_web.service.CarritoService;
 import es.urjc.code.dad.xkeys_web.service.ClienteService;
 import es.urjc.code.dad.xkeys_web.service.ProductoService;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 @Controller
 public class CarritoController {
@@ -50,10 +53,38 @@ public class CarritoController {
 	@GetMapping("/comprar")
 	public String comprar(Model model,Authentication auth) {
 		
-					
+		try {			
+		
 		Cliente cliente = clienteS.findByNombre(auth.getName());
 		Carrito carrito = carritoS.findById(cliente.getCarritoH().getId());
-						    		
+		
+		String direccion = cliente.getCorreo();
+		
+		String mensaje = "Gracias por comprar en Express Keys. Aquí tiene tu/s key/s:\n\n";
+			for(Long x: carrito.getCarrito()) {
+				Producto producto = productoS.findById(x);
+				mensaje = mensaje + "Producto: " + producto.getNombre() + " - " + producto.getPlataforma() + " | " + producto.getPrecio() + "euros | Key: " + producto.getClave().get(0) + "\n";      
+			}
+			
+		String mensajeSI = direccion+";"+mensaje;
+		
+		final String HOST = "localhost";
+		final String NOMBRE_COLA = "xkeys"; 
+		
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost(HOST);
+		Connection connection = factory.newConnection();
+		Channel channel = connection.createChannel();
+		
+		channel.queueDeclare(NOMBRE_COLA, false, false, false, null);
+		channel.basicPublish("", NOMBRE_COLA, null, mensajeSI.getBytes());
+		System.out.println("Direccion enviada: "+direccion);
+		
+		channel.close();
+		connection.close();
+		
+		
+		//Proceso de compra
 		ArrayList<String> recibo = new ArrayList<>();
 		for(Long x: carrito.getCarrito()) {
 	
@@ -71,5 +102,9 @@ public class CarritoController {
 		model.addAttribute("recibo", recibo);
 			
 		return "compraFinalizada";		
+	}catch(Exception e) {
+		System.out.println("No se puede conectar con RabbitMQ");
+		return "errorCompra";
+		}
 	}
 }
