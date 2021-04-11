@@ -34,7 +34,7 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 * Nerfi Salim Perello [n.salim.2017@alumnos.urjc.es] https://github.com/nerf7
 
 # Capturas de pantalla 
-* Página principal: Como página principal, se muestra tanto el catálogo completo de productos junto a los filtros de búsqueda, además de los enlaces de registro e inicio de sesión, y el acceso al carrito. Como opciones exclusivas para los administradores, están el acceso a la lista de usuarios y la posibilidad de añadir un nuevo producto.
+* Página principal: Como página principal, se muestra tanto el catálogo completo de productos junto a los filtros de búsqueda, además de los enlaces de registro e inicio de sesión.
 <p align="center">
 <img src="imagenes/PaginaPrincipal.png">
   
@@ -49,12 +49,28 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 * Inicio de sesión: Se trata de la pantalla que recibe los datos de login de un usuario para que pueda iniciar sesión.
 <p align="center">
 <img src="imagenes/InicioDeSesion.png">
+
+* Página principal (logged): Página principal una vez se ha iniciado sesión correctamente. Es como la pantalla Página principal, pero permite acceder a la Página del carrito y a la Página de usuario. Para administradores, permite acceder a la pantalla Admin.
+<p align="center">
+<img src="imagenes/PaginaPrincipalLogged.png">
+
+* Login error: Pantalla de aviso de que el usuario y contraseña introducidos no pertenecen a ningún usuario registrado. Permite volver a la pantlla de Inicio de sesión.
+<p align="center">
+<img src="imagenes/LoginError.png">
+
+* Admin: Pantalla exclusiva para administradores que permite mostrar la pantalla de Lista de usuarios, Nuevo producto o volver a la Página principal (logged).
+<p align="center">
+<img src="imagenes/Admin.png">
+
+* Perfil: Pantalla que muestra los datos del usuario en la sesión.
+<p align="center">
+<img src="imagenes/Perfil.png">
   
-* Lista de usuarios: Como opción para los administradores, contiene la lista de los usuarios registrados actualmente. Permite acceder a la página de cada usuario o volver a la Página principal.
+* Lista de usuarios: Como opción para los administradores, contiene la lista de los usuarios registrados actualmente y sus roles. Permite acceder a la página de cada usuario o volver a la Página principal (logged).
 <p align="center">
 <img src="imagenes/ListaDeUsuarios.png">
   
-* Página de usuario: Muestra los datos de un usuario y da la opción de eliminarlo de la base de datos.
+* Página de usuario: Página exclusiva de administradores que muestra los datos de un usuario y da la opción de eliminarlo de la base de datos.
 <p align="center">
 <img src="imagenes/PaginaDeUsuario.png">
   
@@ -70,7 +86,7 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 <p align="center">
 <img src="imagenes/ProductoGuardado.png">
   
-* Página de producto: Muestra la información de un producto y da la opción de añadirlo al carrito, dejar una valoración o volver a la página principal. Como opción para los administradores, está la posibilidad de eliminar el producto de la base de datos.
+* Página de producto: Muestra la información de un producto y da la opción de añadirlo al carrito, dejar una valoración o volver a la página principal. Como opción para los administradores, está la posibilidad de eliminar el producto de la base de datos y poder ver las keys que quedan del producto.
 <p align="center">
 <img src="imagenes/PaginaDeProducto.png">
   
@@ -99,6 +115,10 @@ El servicio interno enviará un correo electrónico al usuario tras la compra de
 <img src="imagenes/PaginaDelCarrito.png">
   
 * Compra finalizada: Pantalla de aviso de que la compra ha sido completada. Se adjunta un recibo con los productos comprados y su key. Lleva de vuelta a la Página principal.
+<p align="center">
+<img src="imagenes/CompraFinalizada.png">
+
+* Error compra: Pantalla de aviso de que ocurrió un error al procesar la compra. El carrito se mantendrá como estaba. Lleva de vuelta a la Página principal (logged).
 <p align="center">
 <img src="imagenes/CompraFinalizada.png">
 
