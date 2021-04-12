@@ -133,6 +133,11 @@ Una vez vista cada una de las pantallas, a continuación se adjunta el diagrama 
 <img src="imagenes/DiagramaEntidadRelacion2.PNG">
 
 # Diagrama UML
-Por último adjuntamos una imagen con el diagrama UML:
+Adjuntamos una imagen con el diagrama UML (actualizado):
 <p align="center">
 <img src="imagenes/DiagramaUML.png">
+
+# Diagrama de Clases y templates
+Adjuntamos aquí el diagrama de clases y templates:
+<p align="center">
+<img src="imagenes/DiagramaDeClasesTemplates.jpg">
