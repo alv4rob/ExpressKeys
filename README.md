@@ -252,3 +252,5 @@ java -jar xkeys_web-0.0.1-SNAPSHOT.jar
 ```bash
 java -jar xkeys_si-0.0.1-SNAPSHOT.jar
 ```
+
+7º. Acceder a la web a través del navegador en https://localhost:8443/ .
