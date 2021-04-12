@@ -168,15 +168,24 @@ Pasos para instalar Chocolatey:
 
 1º. Abre Windows PowerShell como administrador.
 
-2º. Ejecuta el comando “Set-ExecutionPolicy AllSigned” para evitar la política de ejecución y confirma con “S”.
+2º. Ejecuta el siguiente comando para evitar la política de ejecución y confirma con “S”.
+```bash
+Set-ExecutionPolicy AllSigned
+```
 
-3º. Ejecuta el comando “Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))” para descargar e instalar Chocolatey.
+3º. Ejecuta el siguiente comando para descargar e instalar Chocolatey.
+```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
 
 Pasos para instalar RabbitMQ:
 
 1º. Abre Windows PowerShell como administrador.
 
-2º. Ejecuta el comando “choco install rabbitmq” para descargar e instalar RabbitMQ y confirma con “Y” las veces necesarias. Permite el acceso de red a las aplicaciones que lo soliciten a través del Firewall de Windows durante la instalación. 
+2º. Ejecuta el siguiente comando para descargar e instalar RabbitMQ y confirma con “Y” las veces necesarias. Permite el acceso de red a las aplicaciones que lo soliciten a través del Firewall de Windows durante la instalación. 
+```bash
+choco install rabbitmq
+```
 
 ## MySQL 8.0.23
 
@@ -220,15 +229,26 @@ Una vez instaladas las aplicaciones necesarias, podemos desplegar la aplicación
 
 Pasos para desplegar la aplicación:
 
-1º. Abre la consola de comandos (Símbolo del sistema) como administrador.
+1º. Descarga los ejecutables xkeys_web-0.0.1-SNAPSHOT.jar y xkeys_si-0.0.1-SNAPSHOT.jar del repositorio.
 
-2º. Comprueba que se está ejecutando el servicio RabbitMQ. Puedes ejecutar el comando “net start RabbitMQ” y se iniciará el servicio o indicará que ya ha sido iniciado.
+2º. Abre la consola de comandos (Símbolo del sistema) como administrador.
 
-3º. Comprueba que se está ejecutando el servicio MySQL80. Puedes ejecutar el comando “net start MySQL80” y se iniciará el servicio o indicará que ya ha sido iniciado.
+3º. Comprueba que se está ejecutando el servicio RabbitMQ. Puedes ejecutar el siguiente comando y se iniciará el servicio o indicará que ya ha sido iniciado.
+```bash
+net start RabbitMQ
+```
 
-4º. Muévete al directorio donde se encuentre xkeys_web-0.0.1-SNAPSHOT.jar y ejecuta el comando “java -jar xkeys_web-0.0.1-SNAPSHOT.jar” para iniciar la aplicación web. Permite el acceso de red si se solicita a través del Firewall de Windows.
+4º. Comprueba que se está ejecutando el servicio MySQL80. Puedes ejecutar el siguiente comando y se iniciará el servicio o indicará que ya ha sido iniciado.
+```bash
+net start MySQL80
+```
 
-5º. Abre otra consola de comandos, muévete al directorio donde se encuentre xkeys_si-0.0.1-SNAPSHOT.jar y ejecuta el comando “java -jar xkeys_si-0.0.1-SNAPSHOT.jar” para iniciar el servicio interno.
+5º. Muévete al directorio donde se encuentre xkeys_web-0.0.1-SNAPSHOT.jar y ejecuta el siguiente comando para iniciar la aplicación web. Permite el acceso de red si se solicita a través del Firewall de Windows.
+```bash
+java -jar xkeys_web-0.0.1-SNAPSHOT.jar
+```
 
-6º. Acceder a la web a través del navegador en https://localhost:8443/ .
-
+6º. Abre otra consola de comandos, muévete al directorio donde se encuentre xkeys_si-0.0.1-SNAPSHOT.jar y ejecuta el siguiente comando para iniciar el servicio interno.
+```bash
+java -jar xkeys_si-0.0.1-SNAPSHOT.jar
+```
