@@ -141,3 +141,63 @@ Adjuntamos una imagen con el diagrama UML (actualizado):
 Adjuntamos aquí el diagrama de clases y templates:
 <p align="center">
 <img src="imagenes/DiagramaDeClasesTemplates.jpg">
+
+# Instrucciones de instalación 
+
+Para desplegar la aplicación sobre Windows 10, además de acceso a internet, se necesita instalar antes en la máquina:
+- Java 8
+- RabbitMQ 3.8.11
+- MySQL 8.0.23
+
+* Java 8
+
+Java 8 es la versión de Java utilizada tanto por la aplicación web como por el servicio interno.
+
+Pasos para instalar Java 8:
+1º. Ve a la página de descarga https://www.java.com/es/download/windows_manual.jsp , elige el archivo de instalación “Windows En línea” y descárgalo.
+2º. Ejecuta el archivo recién descargado y selecciona “Instalar”. Una vez finalizada la instalación, selecciona “Cerrar”.
+
+* RabbitMQ 3.8.11
+
+RabbitMQ es el broker de mensajería que utiliza la aplicación web para comunicarse con el servicio interno. Para facilitar la instalación de RabbitMQ, se hará vía Chocolatey.
+
+Pasos para instalar Chocolatey:
+1º. Abre Windows PowerShell como administrador.
+2º. Ejecuta el comando “Set-ExecutionPolicy AllSigned” para evitar la política de ejecución y confirma con “S”.
+3º. Ejecuta el comando “Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))” para descargar e instalar Chocolatey.
+
+Pasos para instalar RabbitMQ:
+1º. Abre Windows PowerShell como administrador.
+2º. Ejecuta el comando “choco install rabbitmq” para descargar e instalar RabbitMQ y confirma con “Y” las veces necesarias. Permite el acceso de red a las aplicaciones que lo soliciten a través del Firewall de Windows durante la instalación. 
+
+* MySQL 8.0.23
+
+MySQL es la base de datos utilizada por la aplicación web.
+Para instalar MySQL y todas sus herramientas correctamente primero hay que instalar Microsot Visual C++ 2019 Redistributable Package (x64), para instarlarlo se realizaran los siguientes pasos:
+1º. Entrar en este enlace para descargar Microsoft Visual C++ 2019 : https://support.microsoft.com/es-es/topic/descargas-m%C3%A1s-recientes-compatibles-de-visual-c-2647da03-1eea-4433-9aff-95f26a218cc0
+2º. Ir al apartado de Visual Studio 2015,2017,2019 y clicar en el enlace. 
+3º. Abrir el ejecutable, aceptar los términos y condiciones e instalar.
+Una vez hecho esto procedemos a explicar los pasos para instalar MySQL:
+1º. Entrar en este enlace para descargar la base de datos: https://dev.mysql.com/downloads/
+2º. Clicar en MySQLInstaller for Windows.
+3º. Descargar la versión MySQL Installer 8.0.23 (mysql-installer-community-8.0.23.0.msi) y pulsar en la siguiente ventana "No thanks,just start tmy download".
+4º. Abrir el ejecutable. En la pestaña de "Choosing a Setup Type" seleccionar la opción que ponga “Custom” y dale a “Next”.
+5º. Añade los productos MySQL Server 8.0.23, Connector/J 8.0.23 y MySQL Workbench 8.0.23, dale a “Next” y después a “Execute” para instalar los productos. Cuando termine la instalación, dale a “Next” dos veces más.
+6º. En la pestaña “Type and Networking” deja todo como está y dale a “Next”.
+7º. En la pestaña “Authentication Method” deja todo como está y dale a “Next”.
+8º. En la pestaña “Accounts and Roles”, escribe “password” como Root Password y dale a “Next”.
+9º. En la pestaña “Windows Service” deja todo como está y dale a “Next” y después a “Execute”. Cuando termine, dale a “Finish” y después a “Next”. Finalmente, dale a “Finish” para terminar con la instalación y la configuración.
+10º. Abre la aplicación MySQL Workbench y accede a Local instance MySQL80 con la contraseña “password”.
+11º. Elige “Create a new schema in the connected server”, nómbralo “trabajodad” y dale a “Apply” primero una vez y luego otra, y después a “Finish”.
+
+* Despliegue de la aplicación
+Una vez instaladas las aplicaciones necesarias, podemos desplegar la aplicación.
+
+Pasos para desplegar la aplicación:
+1º. Abre la consola de comandos (Símbolo del sistema) como administrador.
+2º. Comprueba que se está ejecutando el servicio RabbitMQ. Puedes ejecutar el comando “net start RabbitMQ” y se iniciará el servicio o indicará que ya ha sido iniciado.
+3º. Comprueba que se está ejecutando el servicio MySQL80. Puedes ejecutar el comando “net start MySQL80” y se iniciará el servicio o indicará que ya ha sido iniciado.
+4º. Muévete al directorio donde se encuentre xkeys_web-0.0.1-SNAPSHOT.jar y ejecuta el comando “java -jar xkeys_web-0.0.1-SNAPSHOT.jar” para iniciar la aplicación web. Permite el acceso de red si se solicita a través del Firewall de Windows.
+5º. Abre otra consola de comandos, muévete al directorio donde se encuentre xkeys_si-0.0.1-SNAPSHOT.jar y ejecuta el comando “java -jar xkeys_si-0.0.1-SNAPSHOT.jar” para iniciar el servicio interno.
+6º. Acceder a la web a través del navegador en https://localhost:8443/ .
+
