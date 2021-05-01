@@ -45,7 +45,7 @@ public class ProductoController {
 	
 	@PostConstruct
 	public void initProducto() {
-		
+		/*
 		Producto producto= new Producto(new ArrayList<>(Arrays.asList("cyberps41", "cyberps42", "cyberps43")), "Cyberpunk 2077", 70, "PC", "Accion");
 		productoS.save(producto);
 		Producto producto2= new Producto(new ArrayList<>(Arrays.asList("fifaps41", "fifaps42", "fifaps413")), "FIFA 21", 60, "PC", "Deporte");
@@ -81,6 +81,7 @@ public class ProductoController {
 		Valoracion v6 = new Valoracion("Pepo","Los pasos de cebra están mal pintados");
 		v6.setProductoH(producto7);	
 		valoracionS.save(v6);
+		*/
 	}
 	
 	

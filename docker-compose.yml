@@ -1,0 +1,27 @@
+version: "3.9"
+services: 
+
+    bd: 
+     image: mysql:8.0.24
+ 
+     environment:
+          - MYSQL_ROOT_PASSWORD=password
+          - MYSQL_DATABASE=trabajodad
+     ports:
+      - "3306"
+     volumes:
+      - ./mysql/data.sql:/docker-entrypoint-initdb.d/data.sql
+
+    web:
+     build: ./xkeys
+     ports:
+     - "8443:8443"
+     environment:
+     - SPRING_DATASOURCE_URL=jdbc:mysql//db:3306/trabajodadserverTimezone=UTC&createDatabaseIfNotExist=true
+     
+     depends_on:
+     - bd
+    
+     
+    
+    

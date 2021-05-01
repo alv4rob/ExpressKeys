@@ -25,7 +25,7 @@ public class ClienteController {
 	
 	@PostConstruct
 	public void initCliente() {
-		
+		/*
 		Cliente cliente = new Cliente("Pepe", "Hey12345", "pepe@bylup.com", "ROLE_USER");
 		Carrito c1 = new Carrito();
 		cliente.setCarritoH(c1);
@@ -40,7 +40,7 @@ public class ClienteController {
 		Carrito c3 = new Carrito();
 		cliente3.setCarritoH(c3);
 		clienteS.save(cliente3);
-			
+		*/	
 	}
 	
 
