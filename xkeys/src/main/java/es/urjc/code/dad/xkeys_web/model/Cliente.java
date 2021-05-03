@@ -120,4 +120,62 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", contrasena=" + passwordHash + ", correo=" + correo + "]";
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carritoH == null) ? 0 : carritoH.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((historial == null) ? 0 : historial.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((passwordHash == null) ? 0 : passwordHash.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (carritoH == null) {
+			if (other.carritoH != null)
+				return false;
+		} else if (!carritoH.equals(other.carritoH))
+			return false;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (historial == null) {
+			if (other.historial != null)
+				return false;
+		} else if (!historial.equals(other.historial))
+			return false;
+		if (id != other.id)
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (passwordHash == null) {
+			if (other.passwordHash != null)
+				return false;
+		} else if (!passwordHash.equals(other.passwordHash))
+			return false;
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
+		return true;
+	}
 }

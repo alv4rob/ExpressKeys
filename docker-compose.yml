@@ -44,4 +44,16 @@ services:
       - broker  
     
     restart: unless-stopped
-    
+
+  balanceador:
+    image: haproxy:2.3.9
+  
+    ports:
+      - "9090:443"
+  
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./haproxy/ssl.pem:/usr/local/etc/ssl/ssl.pem:ro
+ 
+    depends_on:
+      - web    

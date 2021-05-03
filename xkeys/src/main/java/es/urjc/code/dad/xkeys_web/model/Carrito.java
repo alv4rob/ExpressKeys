@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @SessionScope
 @Component
@@ -28,6 +30,7 @@ public class Carrito {
 	
 	
 	@OneToOne(mappedBy= "carritoH")
+	@JsonIgnore
 	private Cliente clienteC;
 	
 	public Carrito() {
@@ -95,6 +98,40 @@ public class Carrito {
 		this.clienteC = clienteC;
 	}
 	
-	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carrito == null) ? 0 : carrito.hashCode());
+		result = prime * result + ((clienteC == null) ? 0 : clienteC.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + precioTotal;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Carrito other = (Carrito) obj;
+		if (carrito == null) {
+			if (other.carrito != null)
+				return false;
+		} else if (!carrito.equals(other.carrito))
+			return false;
+		if (clienteC == null) {
+			if (other.clienteC != null)
+				return false;
+		} else if (!clienteC.equals(other.clienteC))
+			return false;
+		if (id != other.id)
+			return false;
+		if (precioTotal != other.precioTotal)
+			return false;
+		return true;
+	}			
 }
