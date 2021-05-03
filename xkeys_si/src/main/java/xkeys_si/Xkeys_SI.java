@@ -16,7 +16,7 @@ public class Xkeys_SI {
 	
     public static void main(String[] args) {
             	
-    	final String HOST= "localhost"; 
+    	final String HOST= "broker"; 
 		final String NOMBRE_COLA = "xkeys"; 
 		
 		try {

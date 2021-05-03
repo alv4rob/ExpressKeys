@@ -68,7 +68,7 @@ public class CarritoController {
 			
 		String mensajeSI = direccion+";"+mensaje;
 		
-		final String HOST = "localhost";
+		final String HOST = "broker";
 		final String NOMBRE_COLA = "xkeys"; 
 		
 		ConnectionFactory factory = new ConnectionFactory();
