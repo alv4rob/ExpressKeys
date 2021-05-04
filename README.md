@@ -25,7 +25,11 @@ ExpressKeys consiste en una web de compra de "keys" de videojuegos para las dife
 * Consultar información de usuarios.
 
 # Servicio interno 🖥
-El servicio interno enviará un correo electrónico al usuario tras la compra de una key con los detalles de su pedido.
+El servicio interno de Express Keys es el encargado de recoger la lista de productos de una compra para el envío por correo electrónico del ticket de compra con los productos, sus keys y precios a la dirección de correo del cliente. 
+
+La forma que tiene de comunicarse con la aplicación web es mediante colas de mensajes a través del broker de mensajería RabbitMQ.
+
+En el momento de realizar una compra, la web envía un mensaje formado por el ticket de compra y la dirección del cliente a una cola del broker donde es consumido al momento por el SI, que permanece a la escucha de los mensajes que entran en la cola. Una vez recibido el mensaje, el SI separa el mensaje para obtener el ticket y la dirección, formula el correo, lo envía a la dirección del cliente y vuelve a permanecer atento a futuras peticiones hasta que se detenga su ejecución o pierda la conexión con RabbitMQ.
 
 # Integrantes 👥 
 

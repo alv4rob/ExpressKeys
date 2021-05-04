@@ -18,7 +18,7 @@ services:
      
     ports:
       - "15672:15672"
-      - "5672:5672"
+      - "5672"
 
 
   web:
@@ -29,6 +29,7 @@ services:
     
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://bd:3306/trabajodad?serverTimezone=UTC&createDatabaseIfNotExist=true
+      - RABBITMQ_HOST=broker
     
     depends_on:
       - bd 

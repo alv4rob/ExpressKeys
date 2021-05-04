@@ -3,6 +3,7 @@ package es.urjc.code.dad.xkeys_web.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ import com.rabbitmq.client.ConnectionFactory;
 
 @Controller
 public class CarritoController {
+	
+	@Value("${rabbitmq.host}")
+	private String host;
 
 	@Autowired
 	private ProductoService productoS;
@@ -68,7 +72,7 @@ public class CarritoController {
 			
 		String mensajeSI = direccion+";"+mensaje;
 		
-		final String HOST = "broker";
+		final String HOST = host;
 		final String NOMBRE_COLA = "xkeys"; 
 		
 		ConnectionFactory factory = new ConnectionFactory();
