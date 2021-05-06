@@ -1,5 +1,6 @@
 package es.urjc.code.dad.xkeys_web.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
@@ -17,8 +18,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @SessionScope
 @Component
-public class Carrito {
+public class Carrito implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -20,21 +20,41 @@ public class ProductoService {
 	
 	@Cacheable
 	public Collection<Producto> findAll() {
+		try {
+			Thread.sleep (6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return productos.findAll();
 	}
 	
 	@Cacheable
 	public Collection<Producto> filterByPlataforma(String plataforma) {
+		try {
+			Thread.sleep (6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return productos.filterByPlataforma(plataforma);
 	}
 	
 	@Cacheable
 	public Collection<Producto> filterByPrecio(int precio, int precio2) {
+		try {
+			Thread.sleep (6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return productos.filterByPrecio(precio, precio2);
 	}
 	
 	@Cacheable
 	public Collection<Producto> filterByCategoria(String categoria) {
+		try {
+			Thread.sleep (6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return productos.filterByCategoria(categoria);
 	}
 	

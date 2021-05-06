@@ -20,6 +20,11 @@ public class ClienteService {
 
     @Cacheable
 	public Collection<Cliente> findAll() {
+    	try {
+			Thread.sleep (6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return clientes.findAll();
 	}
 
