@@ -258,3 +258,8 @@ java -jar xkeys_si-0.0.1-SNAPSHOT.jar
 ```
 
 7º. Acceder a la web a través del navegador en https://localhost:8443/ .
+
+# Diagrama de infraestructura
+Adjuntamos el diagrama de la infrestructura en Docker con los componentes que forman la aplicación y la relación entre ellos.
+<p align="center">
+<img src="imagenes/DiagramaInfraestructura.jpg">
