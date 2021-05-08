@@ -51,6 +51,7 @@ services:
   
     ports:
       - "9090:443"
+      - "9091:444"
   
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
