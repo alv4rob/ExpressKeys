@@ -2,6 +2,13 @@
 <p align="center">
 <img src="imagenes/logo.png" alt="Logo" width="600" height="600">
 
+
+# Video explicativo de la página web
+En este video se puede ver el perfecto funcionamiento y como se comporta la aplicación en ciertas situaciones forzadas como ejemplo. <br/> 
+<p align="center">
+[![Express Keys](https://img.youtube.com/vi/K3_CQ9RSMkE/0.jpg)](https://youtu.be/K3_CQ9RSMkE)
+  
+
 # Descripción de la web 🌐
 ExpressKeys consiste en una web de compra de "keys" de videojuegos para las diferentes plataformas online del mercado. En ella el cliente puede buscar los diferentes títulos disponibles utilizando diferentes herramientas como por ejemplo un sistema de filtrado por categorías, por precio, por plataforma online, etc... para posteriormente comprarlo y recibir su código para canjearlo.
 
@@ -265,7 +272,3 @@ Adjuntamos el diagrama de la infrestructura en Docker con los componentes que fo
 <img src="imagenes/DiagramaInfraestructura.jpg">
   
   
-# Video explicativo de la página web
-En este video se puede ver el perfecto funcionamiento y como se comporta la aplicación en ciertas situaciones forzadas como ejemplo. <br/> 
-<p align="center">
-[![Express Keys](https://img.youtube.com/vi/K3_CQ9RSMkE/maxresdefault.jpg)] (https://youtu.be/K3_CQ9RSMkE)
