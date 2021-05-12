@@ -266,6 +266,6 @@ Adjuntamos el diagrama de la infrestructura en Docker con los componentes que fo
   
   
 # Video explicativo de la página web
-En este video se puede ver el perfecto funcionamiento y como se comporta la aplicación en ciertas situaciones forzadas como ejemplo. <br/>
+En este video se puede ver el perfecto funcionamiento y como se comporta la aplicación en ciertas situaciones forzadas como ejemplo. <br/> 
 <p align="center">
-[![Express Keys](https://ing.youtube.com/vi/K3_CQ9RSMkE/0.jpg)](https://www.youtube.com/watch?v=K3_CQ9RSMkE)
+[![Express Keys](https://img.youtube.com/vi/K3_CQ9RSMkE/maxresdefault.jpg)](https://youtu.be/K3_CQ9RSMkE)
