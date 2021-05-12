@@ -4,8 +4,8 @@
 
 
 # Video explicativo de la página web
-En este video se puede ver el perfecto funcionamiento y como se comporta la aplicación en ciertas situaciones forzadas como ejemplo. <br/> 
-<p align="center">
+En este video se puede ver el perfecto funcionamiento y como se comporta la aplicación en ciertas situaciones forzadas como ejemplo.
+
 [![Express Keys](https://img.youtube.com/vi/K3_CQ9RSMkE/0.jpg)](https://youtu.be/K3_CQ9RSMkE)
   
 
